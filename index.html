@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sayan Mandal | CS Engineer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- NOISE OVERLAY -->
+  <div class="noise"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header id="header">
+    <nav class="nav container">
+      <a href="#home" class="nav__logo">Coder<span>Sayan</span></a>
+      <ul class="nav__list" id="nav-menu">
+        <li><a href="#home"          class="nav__link active-link">Home</a></li>
+        <li><a href="#about"         class="nav__link">About</a></li>
+        <li><a href="#skills"        class="nav__link">Skills</a></li>
+        <li><a href="#qualification" class="nav__link">Journey</a></li>
+        <li><a href="#projects"      class="nav__link">Projects</a></li>
+        <li><a href="#contact"       class="nav__link">Contact</a></li>
+      </ul>
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HOME ===== -->
+    <section class="home section" id="home">
+      <div class="home__container container">
+        <div class="home__text">
+          <p class="home__greeting">&gt; Hello, World! <span class="blink">_</span></p>
+          <h1 class="home__name">Sayan<br /><span>Mandal</span></h1>
+          <p class="home__role">I build &nbsp;<span id="typed-text"></span></p>
+          <p class="home__sub">// B.Tech CSE · SVIST Kolkata · Batch 2027</p>
+          <div class="home__btns">
+            <a href="#contact" class="btn btn--primary">Get In Touch <i class="fas fa-arrow-right"></i></a>
+            <a href="images/Sayan CV.pdf" class="btn btn--ghost" download>Download CV <i class="fas fa-download"></i></a>
+          </div>
+          <div class="home__socials">
+            <a href="https://github.com/codersayan0" target="_blank" rel="noopener" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:sayanmandal6297@gmail.com" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener" aria-label="Twitter/X">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          </div>
+        </div>
+        <div class="home__visual">
+          <div class="avatar-scene">
+            <div class="avatar-orbit orbit-1">
+              <div class="orbit-dot"><i class="fab fa-python"></i></div>
+            </div>
+            <div class="avatar-orbit orbit-2">
+              <div class="orbit-dot"><i class="fab fa-docker"></i></div>
+            </div>
+            <div class="avatar-orbit orbit-3">
+              <div class="orbit-dot"><i class="fas fa-brain"></i></div>
+            </div>
+            <div class="avatar-core">
+              <div class="avatar-glow"></div>
+              <div class="avatar-img">
+                <img
+                  src="images/Me.png"
+                  alt="Sayan Mandal"
+                  onerror="this.src='https://ui-avatars.com/api/?name=Sayan+Mandal&size=300&background=00f5d4&color=0a0a14&bold=true'"
+                />
+              </div>
+              <div class="avatar-hud hud-tl">CSE '27</div>
+              <div class="avatar-hud hud-br">Kolkata, IN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="scroll-indicator">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <span>Scroll</span>
+      </a>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// about me</span>
+          <h2 class="section-title">Who Am I?</h2>
+        </div>
+        <div class="about__grid">
+          <div class="about__image-side">
+            <div class="about__img-frame">
+              <img src="images/about.png" alt="Sayan Mandal" />
+              <div class="img-corner img-corner--tl"></div>
+              <div class="img-corner img-corner--br"></div>
+            </div>
+            <div class="about__stats">
+              <div class="stat-card">
+                <span class="stat-num">3<span class="stat-plus">+</span></span>
+                <span class="stat-label">Years Coding</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-num">8<span class="stat-plus">+</span></span>
+                <span class="stat-label">Projects Built</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-num">2</span>
+                <span class="stat-label">Internships</span>
+              </div>
+            </div>
+          </div>
+          <div class="about__content">
+            <p class="about__text">
+              Hello! I'm <strong>Sayan Mandal</strong>, a passionate CS Engineering student at
+              <em>Swami Vivekananda Institute of Science and Technology</em>, Kolkata.
+            </p>
+            <p class="about__text">
+              I build intelligent systems — from AI-powered farm advisors and medical assistants
+              to fully Dockerized DevOps pipelines. Proficient in
+              <strong>Python, C/C++, Java</strong> and deeply into
+              <strong>Machine Learning, FastAPI, and Cloud DevOps</strong>.
+            </p>
+            <p class="about__text">
+              Always learning. Always shipping. Open to internships, collabs, and interesting problems.
+            </p>
+            <div class="about__tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Django</span>
+              <span class="tag">Docker</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">Open Source</span>
+              <span class="tag">Algorithms</span>
+              <span class="tag">AI / LLMs</span>
+            </div>
+            <a href="images/Sayan CV.pdf" class="btn btn--primary" download>
+              Resume <i class="fas fa-file-download"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="skills section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// tech stack</span>
+          <h2 class="section-title">Skills & Technologies</h2>
+        </div>
+
+        <!-- TECH ICON MARQUEE -->
+        <div class="tech-marquee">
+          <div class="tech-track">
+            <div class="tech-icon-item" title="C"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"/><span>C</span></div>
+            <div class="tech-icon-item" title="C++"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"/><span>C++</span></div>
+            <div class="tech-icon-item" title="Python"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/><span>Python</span></div>
+            <div class="tech-icon-item" title="Java"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/><span>Java</span></div>
+            <div class="tech-icon-item" title="HTML5"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"/><span>HTML5</span></div>
+            <div class="tech-icon-item" title="CSS3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"/><span>CSS3</span></div>
+            <div class="tech-icon-item" title="JavaScript"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"/><span>JS</span></div>
+            <div class="tech-icon-item" title="Docker"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"/><span>Docker</span></div>
+            <div class="tech-icon-item" title="Kubernetes"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="K8s"/><span>K8s</span></div>
+            <div class="tech-icon-item" title="Terraform"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"/><span>Terraform</span></div>
+            <div class="tech-icon-item" title="MySQL"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"/><span>MySQL</span></div>
+            <div class="tech-icon-item" title="Git"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"/><span>Git</span></div>
+            <div class="tech-icon-item" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"/><span>GitHub</span></div>
+            <div class="tech-icon-item" title="TensorFlow"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TF"/><span>TF</span></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="tech-icon-item" title="C"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"/><span>C</span></div>
+            <div class="tech-icon-item" title="C++"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"/><span>C++</span></div>
+            <div class="tech-icon-item" title="Python"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/><span>Python</span></div>
+            <div class="tech-icon-item" title="Java"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/><span>Java</span></div>
+            <div class="tech-icon-item" title="HTML5"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"/><span>HTML5</span></div>
+            <div class="tech-icon-item" title="CSS3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"/><span>CSS3</span></div>
+            <div class="tech-icon-item" title="JavaScript"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"/><span>JS</span></div>
+            <div class="tech-icon-item" title="Docker"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"/><span>Docker</span></div>
+            <div class="tech-icon-item" title="Kubernetes"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="K8s"/><span>K8s</span></div>
+            <div class="tech-icon-item" title="Terraform"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"/><span>Terraform</span></div>
+            <div class="tech-icon-item" title="MySQL"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"/><span>MySQL</span></div>
+            <div class="tech-icon-item" title="Git"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"/><span>Git</span></div>
+            <div class="tech-icon-item" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"/><span>GitHub</span></div>
+            <div class="tech-icon-item" title="TensorFlow"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TF"/><span>TF</span></div>
+          </div>
+        </div>
+
+        <!-- SKILL TABS -->
+        <div class="skills__tabs">
+          <button class="skills__tab active" data-tab="languages">Languages</button>
+          <button class="skills__tab" data-tab="ai">AI / ML</button>
+          <button class="skills__tab" data-tab="devops">DevOps</button>
+          <button class="skills__tab" data-tab="web">Web Dev</button>
+          <button class="skills__tab" data-tab="core">CS Core</button>
+        </div>
+
+        <div class="skills__panels">
+
+          <div class="skills__panel active" id="tab-languages">
+            <div class="skill-cards">
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">C / C++</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">80%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Python</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:90%"><span class="skill-pct">90%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Java</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:50%"><span class="skill-pct">50%</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__panel" id="tab-ai">
+            <div class="skill-cards">
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">TensorFlow / Keras</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:72%"><span class="skill-pct">72%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="ML"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Scikit-learn</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:75%"><span class="skill-pct">75%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-brain skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Google Gemini / LLMs</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:70%"><span class="skill-pct">70%</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__panel" id="tab-devops">
+            <div class="skill-cards">
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Docker</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:75%"><span class="skill-pct">75%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="K8s"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Kubernetes</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:60%"><span class="skill-pct">60%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Terraform</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:60%"><span class="skill-pct">60%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Linux</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">60%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Git / GitHub Actions</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:82%"><span class="skill-pct">82%</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__panel" id="tab-web">
+            <div class="skill-cards">
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">HTML5</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:65%"><span class="skill-pct">65%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">CSS3</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:65%"><span class="skill-pct">65%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">JavaScript</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:45%"><span class="skill-pct">45%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">FastAPI</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:78%"><span class="skill-pct">78%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"/></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">MySQL</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">80%</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__panel" id="tab-core">
+            <div class="skill-cards">
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-sitemap skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Data Structures</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">80%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-project-diagram skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Algorithms</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:70%"><span class="skill-pct">70%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-cubes skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">OOP</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">80%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-server skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Operating Systems</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:80%"><span class="skill-pct">80%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-network-wired skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">Computer Networks</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:70%"><span class="skill-pct">70%</span></div></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-card__icon-wrap"><i class="fas fa-database skill-icon-fa"></i></div>
+                <div class="skill-card__body">
+                  <span class="skill-name">DBMS</span>
+                  <div class="skill-bar"><div class="skill-fill" style="--pct:70%"><span class="skill-pct">70%</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUALIFICATION ===== -->
+    <section class="qualification section" id="qualification">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// my journey</span>
+          <h2 class="section-title">Education & Experience</h2>
+        </div>
+        <div class="qual__tabs">
+          <button class="qual__tab active" data-qtab="education">
+            <i class="fas fa-graduation-cap"></i> Education
+          </button>
+          <button class="qual__tab" data-qtab="experience">
+            <i class="fas fa-briefcase"></i> Experience
+          </button>
+        </div>
+
+        <div class="qual__content active" id="qtab-education">
+          <div class="timeline">
+            <div class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <span class="tl__year">2023 – 2027</span>
+                <h3>B.Tech in Computer Science Engineering</h3>
+                <p class="tl__org"><i class="fas fa-university"></i> Swami Vivekananda Institute of Science and Technology, Kolkata</p>
+                <p class="tl__desc">Pursuing core CS — Data Structures, Algorithms, OOP, OS, DBMS, Computer Networks, and AI/ML electives.</p>
+              </div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <span class="tl__year">2021 – 2023</span>
+                <h3>Higher Secondary (Class XII)</h3>
+                <p class="tl__org"><i class="fas fa-school"></i> Akchara Desh Bandhu High School</p>
+                <p class="tl__desc">Science stream — Physics, Chemistry, Mathematics.</p>
+              </div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <span class="tl__year">2023 – Present</span>
+                <h3>Self-Directed Technical Development</h3>
+                <p class="tl__org"><i class="fas fa-code"></i> Independent</p>
+                <p class="tl__desc">Building AI/ML projects, DevOps pipelines, and open-source contributions continuously.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qual__content" id="qtab-experience">
+          <div class="timeline">
+            <div class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <span class="tl__year">Aug – Sep 2025</span>
+                <h3>Python Development Intern</h3>
+                <p class="tl__org"><i class="fas fa-building"></i> Cognifyz Technologies</p>
+                <p class="tl__desc">Worked on Python development projects, building real-world applications and automation scripts in a structured internship.</p>
+                <a href="images/Sayan Mandal.pdf" class="tl__link" download>
+                  <i class="fas fa-file-download"></i> Offer Letter
+                </a>
+              </div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <span class="tl__year">Aug – Sep 2025</span>
+                <h3>Python Intern</h3>
+                <p class="tl__org"><i class="fas fa-building"></i> BroskiesHub</p>
+                <p class="tl__desc">Contributed to Python development tasks, applied best practices in scripting, automation, and team collaboration.</p>
+                <a href="images/Sayan_Mandal_offer_letter.pdf" class="tl__link" download>
+                  <i class="fas fa-file-download"></i> Offer Letter
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="projects section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// recent work</span>
+          <h2 class="section-title">Projects</h2>
+        </div>
+        <div class="projects__grid">
+
+          <!-- AgroPulse -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#22c55e;">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/AgroPulse" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://agro-pulse-two.vercel.app" target="_blank" rel="noopener" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">AgroPulse</h3>
+            <p class="project-card__desc">
+              AI-powered farm advisory for Indian farmers. Crop recommendation (Random Forest ~99%), disease detection (MobileNetV2 ~95%), fertilizer guide, Gemini AI chat, live weather & mandi prices. Supports 5 Indian languages + voice input.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>FastAPI</span><span>TensorFlow</span>
+              <span>Scikit-learn</span><span>Gemini API</span><span>Vercel</span>
+            </div>
+          </article>
+
+          <!-- MediAssist-AI -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#3b82f6;">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/MediAssist-AI" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">MediAssist AI</h3>
+            <p class="project-card__desc">
+              AI-powered medical assistant with ML-based disease prediction from symptoms, Gemini-powered medical Q&A, and a clean frontend UI. Dockerized for consistent deployment with FastAPI backend and Jupyter-trained notebooks.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>FastAPI</span><span>ML</span>
+              <span>Gemini API</span><span>Docker</span><span>Jupyter</span>
+            </div>
+          </article>
+
+          <!-- MediaDrop DevOps -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#f59e0b;">
+                <i class="fas fa-film"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/video-audio-devops" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://video-audio-devops.onrender.com/" target="_blank" rel="noopener" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">MediaDrop DevOps</h3>
+            <p class="project-card__desc">
+              Cloud-native, Dockerized video/audio downloader from 1000+ platforms. Full CI/CD pipeline with GitHub Actions → GHCR → Render auto-deploy. Built as a real-world DevOps project using FastAPI + yt-dlp + FFmpeg.
+            </p>
+            <div class="project-card__tags">
+              <span>FastAPI</span><span>Docker</span><span>GitHub Actions</span>
+              <span>yt-dlp</span><span>FFmpeg</span><span>Render</span>
+            </div>
+          </article>
+
+          <!-- Sayan's Chatbot -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#a855f7;">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/Sayan-Chatbot" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Sayan's Chatbot</h3>
+            <p class="project-card__desc">
+              Multimodal AI chatbot powered by Google Gemini Flash 1.5, built with Gradio. Accepts text, voice, and image inputs — responds with voice + text. A powerful tool for natural and visual AI interaction.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>Gemini API</span><span>Gradio</span><span>Multimodal</span>
+            </div>
+          </article>
+
+          <!-- Jarves -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#ec4899;">
+                <i class="fas fa-microphone-alt"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/Jarvis" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Jarves</h3>
+            <p class="project-card__desc">
+              Python-based virtual assistant — checks time/date, searches Wikipedia, plays music, takes screenshots, tells jokes, and controls the system (shutdown/restart). Built with NLP and automation.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>NLP</span><span>Automation</span><span>Speech</span>
+            </div>
+          </article>
+
+          <!-- ATS Resume Checker -->
+          <article class="project-card" data-tilt>
+            <div class="project-card__header">
+              <div class="project-card__icon" style="--icon-color:#14b8a6;">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="project-card__links">
+                <a href="https://github.com/codersayan0/ATS-Resume-Checker" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-card__title">ATS Resume Checker</h3>
+            <p class="project-card__desc">
+              AI-powered resume analyzer using NLP and ML models. Extracts name, email, skills and entities from resumes, then matches them against job descriptions with intelligent scoring.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>NLP</span><span>Scikit-learn</span><span>ML</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+ <!-- ===== CONTACT ===== -->
+<section class="contact section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// get in touch</span>
+      <h2 class="section-title">Contact Me</h2>
+    </div>
+
+    <div class="contact__grid">
+
+      <!-- LEFT INFO -->
+      <div class="contact__info">
+        <p class="contact__intro">
+          Have a project, internship opportunity, or just want to connect?
+          My inbox is always open. Let's build something great together.
+        </p>
+
+        <div class="contact__items">
+          <div class="contact__item">
+            <div class="contact__icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <span class="contact__label">Email</span>
+              <a href="mailto:sayanmandal7212@gmail.com" class="contact__val">sayanmandal7212@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <span class="contact__label">Location</span>
+              <span class="contact__val">Midnapore, West Bengal, India</span>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon"><i class="fab fa-github"></i></div>
+            <div>
+              <span class="contact__label">GitHub</span>
+              <a href="https://github.com/codersayan0" target="_blank" rel="noopener" class="contact__val">codersayan0</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact__socials">
+          <a href="https://github.com/codersayan0" target="_blank" rel="noopener" class="social-pill">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener" class="social-pill">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener" class="social-pill">
+            <i class="fab fa-x-twitter"></i> Twitter
+          </a>
+          <a href="https://www.youtube.com/@codersayan0" target="_blank" rel="noopener" class="social-pill">
+            <i class="fab fa-youtube"></i> YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <form class="contact__form" id="contact-form" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="user_name" id="user_name"
+              placeholder=" " required autocomplete="off" />
+            <label for="user_name">Your Name</label>
+          </div>
+          <div class="form-group">
+            <input type="email" name="user_email" id="user_email"
+              placeholder=" " required autocomplete="off" />
+            <label for="user_email">Your Email</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="subject" id="subject"
+            placeholder=" " autocomplete="off" />
+          <label for="subject">Subject <span class="optional">(optional)</span></label>
+        </div>
+
+        <div class="form-group">
+          <textarea name="message" id="message"
+            rows="5" placeholder=" " required></textarea>
+          <label for="message">Your Message</label>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" id="submit-btn">
+          <span id="btn-text">Send Message</span>
+          <i class="fas fa-paper-plane" id="btn-icon"></i>
+        </button>
+
+        <div class="form-feedback" id="form-feedback"></div>
+
+        <p class="form-note">// Powered by CoderSayan · Reply within 24h</p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">
+        © 2026 <strong>Sayan Mandal</strong> · Built with lots of <span class="heart">❤</span> 
+
+      <div class="footer__links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#home" class="scroll-up" id="scroll-up" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <div class="toast" id="toast"></div>
+
+<!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Init EmailJS with your public key -->
+  <script>
+    emailjs.init({ publicKey: "cmzysj1m3xH3P_Lme" });
+  </script>
+
+  <!-- Main script — NO defer -->
+  <script src="main.js"></script>
+
+</body>
+</html>
