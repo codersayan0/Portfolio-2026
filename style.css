@@ -790,6 +790,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--text);
   letter-spacing: -0.01em;
 }
+/* ---- PROJECT LINKS FIX ---- */
+.project-card {
+  transform-style: flat;
+}
+
+.project-card__links {
+  position: relative;
+  z-index: 100;
+}
+
+.project-card__links a {
+  position: relative;
+  z-index: 100;
+  pointer-events: all !important;
+  cursor: pointer !important;
+}
 .project-card__desc {
   color: var(--text-muted);
   font-size: 0.84rem;

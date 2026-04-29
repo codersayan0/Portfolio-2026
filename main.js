@@ -202,6 +202,7 @@ revealEls.forEach(el => revealObs.observe(el));
 /* ---- 3D CARD TILT ---- */
 document.querySelectorAll('[data-tilt]').forEach(card => {
   card.addEventListener('mousemove', e => {
+    if (e.target.closest('a')) return;
     const rect = card.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
@@ -213,6 +214,13 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
+  });
+// Stop tilt when mouse is over links
+  card.querySelectorAll('a').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
   });
 });
 
