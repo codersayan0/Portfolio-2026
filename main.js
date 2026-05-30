@@ -2,6 +2,43 @@
    SAYAN MANDAL PORTFOLIO v2 — main.js
    ================================================================ */
 
+/* ---- INTRO LOADER ---- */
+(function runIntro() {
+  const loader = document.getElementById('intro-loader');
+  if (!loader) return;
+
+  // Prevent scroll during intro
+  document.body.style.overflow = 'hidden';
+
+  const words = ['iw1', 'iw2', 'iw3', 'iw4'];
+  const timings = [0, 750, 1500, 2300]; // when each word appears (ms)
+  const duration = 700; // how long each word stays visible
+
+  words.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Show word
+    setTimeout(() => {
+      el.classList.add('active');
+    }, timings[i]);
+
+    // Hide word (except last — it fades with loader)
+    if (i < words.length - 1) {
+      setTimeout(() => {
+        el.classList.remove('active');
+        el.classList.add('exit');
+      }, timings[i] + duration + 200);
+    }
+  });
+
+  // Hide loader after all words shown
+  setTimeout(() => {
+    loader.classList.add('hide');
+    document.body.style.overflow = '';
+  }, 3400);
+})();
+
 /* ---- THREE.JS STAR FIELD ---- */
 (function initStars() {
   const canvas = document.getElementById('bg-canvas');
