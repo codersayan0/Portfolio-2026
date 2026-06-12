@@ -219,6 +219,19 @@ document.querySelectorAll('.qual__tab').forEach(tab => {
   });
 });
 
+/* ---- CERTIFICATIONS — Open Google Drive ---- */
+document.querySelectorAll('.view-cert-btn').forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const driveId = this.closest('.cert__card').dataset.drive;
+    if (driveId && !driveId.startsWith('PASTE_')) {
+      window.open('https://drive.google.com/file/d/' + driveId + '/view', '_blank');
+    } else {
+      showToast('Certificate link coming soon!');
+    }
+  });
+});
+
 /* ---- SCROLL REVEAL ---- */
 const revealEls = document.querySelectorAll(
   '.section-header, .about__grid, .skill-card, ' +
