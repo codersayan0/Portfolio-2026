@@ -1472,6 +1472,31 @@ a.contact__val:hover { color: var(--accent); }
 .footer__links a { color: var(--text-dim); font-size: 0.8rem; font-family: var(--font-mono); transition: var(--t); }
 .footer__links a:hover { color: var(--accent); }
 
+/* Footer socials */
+.footer__socials {
+  display: flex;
+  gap: 0.6rem;
+}
+.footer__socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: var(--t);
+}
+.footer__socials a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 245, 212, 0.2);
+}
+
 /* Scroll up */
 .scroll-up {
   position: fixed;
