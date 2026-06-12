@@ -809,6 +809,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .timeline {
   position: relative;
   padding-left: 2rem;
+  overflow: visible; 
 }
 .timeline::before {
   content: '';
