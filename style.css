@@ -208,7 +208,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    HOME
    ================================================================ */
 .home {
-  min-height: 100vh;
+  min-height: clamp(600px, 100vh, 950px);
   display: flex;
   align-items: center;
   padding-top: var(--nav-h);
