@@ -32,11 +32,16 @@
     }
   });
 
-  // Hide loader after all words shown
-  setTimeout(() => {
+  // Hide loader after all words shown (click / key / reduced-motion skips it)
+  const hideLoader = () => {
     loader.classList.add('hide');
     document.body.style.overflow = '';
-  }, 3400);
+  };
+  const hideTimer = setTimeout(hideLoader, 3400);
+  const skip = () => { clearTimeout(hideTimer); hideLoader(); };
+  loader.addEventListener('click', skip);
+  document.addEventListener('keydown', skip, { once: true });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) skip();
 })();
 
 /* ---- THREE.JS STAR FIELD ---- */
@@ -79,13 +84,15 @@
     my = (e.clientY / window.innerHeight - 0.5) * 0.2;
   });
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function tick() {
     requestAnimationFrame(tick);
+    if (document.hidden) return;
     stars.rotation.y += 0.0003 + mx * 0.0006;
     stars.rotation.x += 0.0001 + my * 0.0004;
     renderer.render(scene, camera);
   }
-  tick();
+  if (reduceMotion) renderer.render(scene, camera); else tick();
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -114,28 +121,9 @@ document.addEventListener('mousemove', e => {
   requestAnimationFrame(lagRing);
 })();
 
-document.querySelectorAll('a, button, .skill-card, .project-card, .tech-icon-item').forEach(el => {
+document.querySelectorAll('a, button, .skill-card, .project-card, .feature, .tech-icon-item').forEach(el => {
   el.addEventListener('mouseenter', () => ring && ring.classList.add('expand'));
   el.addEventListener('mouseleave', () => ring && ring.classList.remove('expand'));
-});
-
-/* ---- TYPED.JS ---- */
-window.addEventListener('load', () => {
-  if (typeof Typed !== 'undefined') {
-    new Typed('#typed-text', {
-      strings: [
-        'AI-Powered Systems.',
-        'DevOps Pipelines.',
-        'Python Applications.',
-        'Intelligent Tools.',
-        'Clean Solutions.'
-      ],
-      typeSpeed: 55,
-      backSpeed: 35,
-      backDelay: 1800,
-      loop: true
-    });
-  }
 });
 
 /* ---- HEADER SCROLL ---- */
@@ -194,19 +182,9 @@ document.querySelectorAll('.skills__tab').forEach(tab => {
     document.querySelectorAll('.skills__panel').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     const panel = document.getElementById('tab-' + tab.dataset.tab);
-    if (panel) {
-      panel.classList.add('active');
-      panel.querySelectorAll('.skill-fill').forEach(f => {
-        f.classList.remove('animate');
-        void f.offsetWidth;
-        f.classList.add('animate');
-      });
-    }
+    if (panel) panel.classList.add('active');
   });
 });
-setTimeout(() => {
-  document.querySelectorAll('.skills__panel.active .skill-fill').forEach(f => f.classList.add('animate'));
-}, 600);
 
 /* ---- QUALIFICATION TABS ---- */
 document.querySelectorAll('.qual__tab').forEach(tab => {
@@ -236,7 +214,7 @@ document.querySelectorAll('.view-cert-btn').forEach(btn => {
 const revealEls = document.querySelectorAll(
   '.section-header, .about__grid, .skill-card, ' +
   '.timeline__item, .project-card, .contact__info, ' +
-  '.contact__form, .stat-card, .tech-marquee'
+  '.contact__form, .stat-card, .tech-marquee, .feature'
 );
 revealEls.forEach(el => el.classList.add('reveal'));
 const revealObs = new IntersectionObserver((entries) => {
@@ -362,3 +340,296 @@ if (contactForm) {
     });
   });
 }
+
+/* ---- SCROLL PROGRESS BAR ---- */
+(function () {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ---- COUNT-UP NUMBERS ---- */
+(function () {
+  const els = document.querySelectorAll('[data-count]');
+  const fmt = (el, v) => {
+    const dec = parseInt(el.dataset.dec || '0', 10);
+    el.textContent = v.toFixed(dec) + (el.dataset.suffix || '');
+  };
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, end = parseFloat(el.dataset.count);
+      obs.unobserve(el);
+      if (reduce) { fmt(el, end); return; }
+      const dur = 1400, t0 = performance.now();
+      (function step(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        fmt(el, end * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+    });
+  }, { threshold: 0.4 });
+  els.forEach(el => { fmt(el, 0); obs.observe(el); });
+})();
+
+
+/* ================================================================
+   v4 — PROJECTS (data-driven grid + modal) and extra motion
+   To add a project: add one object to PROJECTS below. That's it.
+   cat: any of 'ai' | 'backend' | 'fullstack' | 'devops'
+   ================================================================ */
+(function () {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine   = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const PROJECTS = [
+    { name: 'MediMitra', fc: '#06b6d4', cat: ['ai', 'fullstack'], img: 'images/projects/medimitra.webp', status: 'Deployed',
+      tag: 'AI-powered multilingual healthcare platform',
+      desc: 'A multilingual platform for patient case management, symptom analysis, report summarization and doctor appointment booking, bringing patients, doctors and admins together in one place.',
+      points: ['AI case interview with chat and voice input', 'Report upload and summarization using RAG with the Gemini API', 'Doctor appointment booking, unique patient ID generation and patient health history', 'Role-based access (patient, doctor, admin) with JWT and email OTP authentication', 'English, Bengali and Hindi support'],
+      metrics: [[3, 'User roles'], [3, 'Languages']],
+      tags: ['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'Python', 'FastAPI', 'MongoDB Atlas', 'Gemini API', 'RAG', 'JWT', 'EmailJS'],
+      live: 'https://medimitra-codersayan.vercel.app/' },
+    { name: 'AgroPulse', fc: '#22c55e', cat: ['ai', 'backend'], img: 'images/projects/agropulse.webp', status: 'Deployed',
+      tag: 'AI farm advisory for Indian farmers',
+      desc: 'Small and marginal farmers (86% of Indian farmers, per NABARD 2022) often decide on crops, fertilizers and diseases by guesswork. AgroPulse offers free, multilingual AI advice from any phone browser.',
+      points: ['AI farm advisor on Gemini with voice input, in English, Hindi, Bengali, Tamil and Telugu', 'Crop and fertilizer recommendation using Random Forest models trained on Kaggle datasets', 'Leaf-photo disease detection through Gemini Vision, with a MobileNetV2 model kept as backup', 'Live weather forecast and mandi prices; all API keys stay on the FastAPI backend'],
+      metrics: [[6, 'Modules'], [5, 'Languages'], [99.3, 'Crop-model accuracy', '%', 1]],
+      tags: ['Python', 'FastAPI', 'Scikit-learn', 'TensorFlow', 'Gemini API', 'OpenWeatherMap', 'API Ninjas', 'MongoDB Atlas', 'Vercel', 'Render'],
+      live: 'https://agro-pulse-two.vercel.app', gh: 'https://github.com/codersayan0/AgroPulse' },
+    { name: 'SmartRoom', fc: '#7b2fff', cat: ['fullstack', 'backend'], img: 'images/projects/smartroom.webp', status: 'Deployed',
+      tag: 'Intelligent classroom management platform',
+      desc: 'A classroom platform where students sign in through a two-step check and teachers get a clear view of content, access requests and session activity.',
+      points: ['Two-step login: email OTP or face recognition (face-api.js in the browser, DeepFace on the backend)', 'JWT role-based access for students and teachers, bcrypt password hashing, OTP auto-expiry via MongoDB TTL index', 'Teacher dashboard: upload videos and files, approve registrations, view activity log, export CSV', 'Automatic session tracking with login time and duration per student'],
+      metrics: [[20, 'API endpoints'], [2, 'Roles'], [2, 'Login factors']],
+      tags: ['Python', 'FastAPI', 'MongoDB Atlas', 'DeepFace', 'face-api.js', 'JWT', 'SendGrid', 'Cloudinary', 'Vercel', 'Render'],
+      live: 'https://smart-classroom-sayan.vercel.app', gh: 'https://github.com/codersayan0/SmartClassroom' },
+    { name: 'MediaDrop DevOps', fc: '#f59e0b', cat: ['devops', 'backend'], img: 'images/projects/mediadrop.webp', status: 'Deployed',
+      tag: 'Cloud-native video-to-audio platform',
+      desc: 'A cloud-native video-to-audio conversion platform built with Python microservices, containerized with Docker, orchestrated on Kubernetes and deployed on AWS EKS.',
+      points: ['Microservices: authentication (JWT), API gateway for upload/download, video converter and email notifications', 'Docker containers, Kubernetes orchestration and Helm-based deployment to AWS EKS', 'RabbitMQ messaging between services, MongoDB for app data and PostgreSQL for metadata', 'CI/CD with GitHub Actions (build, test, deploy), monitored with Prometheus and Grafana'],
+      metrics: [],
+      tags: ['Python', 'FastAPI', 'Docker', 'Kubernetes', 'Helm', 'AWS EKS', 'RabbitMQ', 'MongoDB', 'PostgreSQL', 'GitHub Actions', 'Prometheus', 'Grafana', 'Render'],
+      live: 'https://video-audio-devops.onrender.com/', gh: 'https://github.com/codersayan0/video-audio-devops' },
+    { name: "Sayan's Chatbot", fc: '#a855f7', cat: ['ai'], img: 'images/projects/chatbot.webp', status: 'On GitHub',
+      tag: 'Multimodal AI chatbot with voice, text and image input',
+      desc: 'Multimodal AI chatbot powered by Google Gemini Flash 1.5, built with Gradio. Accepts text, voice, and image inputs and responds with voice and text.',
+      points: ['Text, voice and image inputs in one interface', 'Responds with both voice and text', 'Powered by Google Gemini Flash 1.5 with a Gradio front end'],
+      metrics: [], tags: ['Python', 'Gemini API', 'Gradio', 'Multimodal'],
+      gh: 'https://github.com/codersayan0/Sayan-Chatbot' },
+    { name: 'Jarves', fc: '#ec4899', cat: ['ai'], img: 'images/projects/jarves.webp', status: 'On GitHub',
+      tag: 'Python voice assistant built on NLP and automation',
+      desc: 'Python-based virtual assistant built with NLP and automation. It answers by voice and handles everyday desktop tasks.',
+      points: ['Checks the time and date, searches Wikipedia', 'Plays music, takes screenshots, tells jokes', 'Controls the system (shutdown / restart)'],
+      metrics: [], tags: ['Python', 'NLP', 'Automation', 'Speech'],
+      gh: 'https://github.com/codersayan0/Jarvis' }
+  ];
+
+  const grid = document.getElementById('pgrid');
+  const modal = document.getElementById('pmodal');
+  const bar = document.getElementById('pfilter');
+  if (!grid || !modal) return;
+  const ring = document.querySelector('.cursor-ring');
+  const cols = () => (matchMedia('(max-width: 640px)').matches ? 2 : 3);
+  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+  /* ---- render cards ---- */
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <article class="pcard" tabindex="0" role="button" data-cat="${p.cat.join(' ')}" data-i="${i}" aria-label="${esc(p.name)} – open details" style="--fc:${p.fc};--i:${i % cols()}">
+      <div class="pcard__img">
+        <img src="${p.img}" alt="${esc(p.name)} project preview" width="1200" height="675" loading="lazy" />
+        <span class="pcard__badge ${p.live ? '' : 'pcard__badge--src'}"><i></i>${p.status}</span>
+      </div>
+      <div class="pcard__body">
+        <h3 class="pcard__title">${esc(p.name)}</h3>
+        <p class="pcard__tag">${esc(p.tag)}</p>
+        <div class="pcard__tags">${p.tags.slice(0, 3).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+        <div class="pcard__foot">
+          <span class="pcard__more">Details <i class="fas fa-arrow-right"></i></span>
+          <span class="pcard__links">
+            ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" aria-label="${esc(p.name)} live demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
+            ${p.gh ? `<a href="${p.gh}" target="_blank" rel="noopener" aria-label="${esc(p.name)} on GitHub"><i class="fab fa-github"></i></a>` : ''}
+          </span>
+        </div>
+      </div>
+    </article>`).join('');
+  const cards = [...grid.children];
+
+  /* ---- reveal on scroll (staggered per row) ---- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  cards.forEach(c => io.observe(c));
+
+  /* ---- spotlight, 3D tilt, cursor ring, open ---- */
+  cards.forEach(c => {
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      c.style.setProperty('--mx', x + 'px'); c.style.setProperty('--my', y + 'px');
+      if (fine && !reduce) {
+        c.style.setProperty('--rx', ((y / r.height - 0.5) * -7).toFixed(2) + 'deg');
+        c.style.setProperty('--ry', ((x / r.width - 0.5) * 7).toFixed(2) + 'deg');
+      }
+    });
+    c.addEventListener('pointerleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
+    c.addEventListener('mouseenter', () => ring && ring.classList.add('expand'));
+    c.addEventListener('mouseleave', () => ring && ring.classList.remove('expand'));
+    c.addEventListener('click', e => { if (!e.target.closest('a')) openModal(PROJECTS[c.dataset.i]); });
+    c.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); openModal(PROJECTS[c.dataset.i]); }
+    });
+  });
+
+  /* ---- filter ---- */
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    bar.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    const f = b.dataset.f;
+    cards.forEach(c => c.classList.add('out'));
+    setTimeout(() => {
+      let n = 0;
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat.split(' ').includes(f);
+        c.hidden = !show;
+        if (show) { c.style.setProperty('--i', n++ % cols()); c.classList.add('in'); requestAnimationFrame(() => c.classList.remove('out')); }
+      });
+    }, reduce ? 0 : 220);
+  });
+
+  /* ---- modal ---- */
+  function openModal(p) {
+    modal.style.setProperty('--fc', p.fc);
+    modal.innerHTML = `
+      <div class="pm">
+        <button class="pm__x" data-close aria-label="Close"><i class="fas fa-xmark"></i></button>
+        <div class="pm__img"><img src="${p.img}" alt="${esc(p.name)} banner" /></div>
+        <div class="pm__body">
+          <div class="pm__col">
+            <h3 class="pm__title">${esc(p.name)}</h3>
+            <p class="pm__tag">${esc(p.tag)}</p>
+            <div class="pm__btns">
+              ${p.live ? `<a class="project-card__btn" href="${p.live}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+              ${p.gh ? `<a class="project-card__btn project-card__btn--ghost" href="${p.gh}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>` : ''}
+            </div>
+            <p class="pm__desc">${esc(p.desc)}</p>
+            ${p.metrics.length ? `<div class="pm__metrics">${p.metrics.map(m => `<div><b data-n="${m[0]}" data-dec="${m[3] || 0}" data-suf="${m[2] || ''}">0</b><span>${m[1]}</span></div>`).join('')}</div>` : ''}
+          </div>
+          <div class="pm__col">
+            <ul class="pm__pts">${p.points.map(t => `<li><i class="fas fa-check"></i><span>${esc(t)}</span></li>`).join('')}</ul>
+            <div class="pm__tags">${p.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
+          </div>
+        </div>
+      </div>`;
+    modal.querySelectorAll('.pm__col > *').forEach((el, i) => el.style.setProperty('--k', i));
+    document.body.style.overflow = 'hidden';
+    modal.showModal();
+    modal.querySelectorAll('[data-n]').forEach(el => {
+      const end = parseFloat(el.dataset.n), dec = +el.dataset.dec, suf = el.dataset.suf;
+      const put = v => { el.textContent = v.toFixed(dec) + suf; };
+      if (reduce) return put(end);
+      const t0 = performance.now();
+      (function step(t) { const k = Math.min((t - t0) / 1100, 1); put(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })(t0);
+    });
+  }
+  function closeModal() {
+    if (!modal.open) return;
+    modal.classList.add('closing');
+    setTimeout(() => { modal.close(); modal.classList.remove('closing'); }, reduce ? 0 : 220);
+  }
+  modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-close]')) closeModal(); });
+  modal.addEventListener('cancel', e => { e.preventDefault(); closeModal(); });
+  modal.addEventListener('close', () => { document.body.style.overflow = ''; });
+})();
+
+/* ---- HERO: letter-by-letter name reveal + typing role ---- */
+(function () {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const start = reduce ? 0 : 3300; // after the intro loader
+
+  const nm = document.querySelector('.home__name');
+  if (nm) {
+    let k = 0;
+    const wrap = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const f = document.createDocumentFragment();
+        [...n.textContent].forEach(ch => {
+          const s = document.createElement('span');
+          s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.style.setProperty('--k', k++); s.textContent = ch;
+          f.appendChild(s);
+        });
+        n.replaceWith(f);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') wrap(n);
+    });
+    nm.setAttribute('aria-label', 'Sayan Mandal');
+    wrap(nm);
+    setTimeout(() => nm.classList.add('go'), start);
+  }
+
+  const role = document.querySelector('.home__role');
+  if (role && !reduce) {
+    const phrases = [role.textContent.trim(), 'Backend Engineer | Web Developer', 'Open to internships'];
+    role.setAttribute('aria-label', phrases[0]);
+    role.textContent = '';
+    const out = document.createElement('span');
+    role.appendChild(out); role.classList.add('typing');
+    let pi = 0, ci = 0, del = false;
+    (function tick() {
+      const w = phrases[pi];
+      ci += del ? -1 : 1;
+      out.textContent = w.slice(0, ci);
+      let d = del ? 26 : 55;
+      if (!del && ci === w.length) { del = true; d = 1800; }
+      else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; d = 350; }
+      setTimeout(tick, d);
+    })();
+    // (typing starts immediately but sits behind the loader until it hides)
+  }
+})();
+
+/* ---- Magnetic buttons + hero parallax (desktop pointers only) ---- */
+(function () {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('.btn, .home__socials a, .social-pill').forEach(el => {
+    let last = '0px 0px';
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      last = `${(e.clientX - r.left - r.width / 2) * 0.25}px ${(e.clientY - r.top - r.height / 2) * 0.35}px`;
+      el.style.translate = last;
+    });
+    el.addEventListener('pointerleave', () => {
+      el.animate({ translate: [last, '0px 0px'] }, { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      el.style.translate = '';
+    });
+  });
+
+  const vis = document.querySelector('.home__visual');
+  if (vis) document.addEventListener('pointermove', e => {
+    vis.style.translate = `${(e.clientX / innerWidth - 0.5) * -18}px ${(e.clientY / innerHeight - 0.5) * -14}px`;
+  }, { passive: true });
+})();
+
+/* ---- Section titles "decode" into place when they scroll in ---- */
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const glyphs = '01<>/{}_#$%*';
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    obs.unobserve(e.target);
+    const el = e.target, txt = el.textContent; let f = 0;
+    const id = setInterval(() => {
+      f++;
+      el.textContent = [...txt].map((c, i) => (c === ' ' || c === '&' || i < txt.length * f / 16) ? c : glyphs[Math.random() * glyphs.length | 0]).join('');
+      if (f >= 16) { clearInterval(id); el.textContent = txt; }
+    }, 38);
+  }), { threshold: 0.8 });
+  document.querySelectorAll('.section-title').forEach(t => obs.observe(t));
+})();
