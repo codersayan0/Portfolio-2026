@@ -175,16 +175,27 @@ document.querySelectorAll('.nav__link').forEach(link => {
   });
 });
 
-/* ---- SKILLS TABS ---- */
-document.querySelectorAll('.skills__tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.skills__tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.skills__panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    const panel = document.getElementById('tab-' + tab.dataset.tab);
-    if (panel) panel.classList.add('active');
+/* ---- SKILL GROUPS: staggered reveal + cursor spotlight ---- */
+(function () {
+  const groups = document.querySelectorAll('.skill-group');
+  if (!groups.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.skill-chip img').forEach(im => im.addEventListener('error', () => im.remove()));
+  groups.forEach(g => {
+    io.observe(g);
+    g.addEventListener('pointermove', e => {
+      const r = g.getBoundingClientRect();
+      g.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      g.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    g.addEventListener('mouseenter', () => ring && ring.classList.add('expand'));
+    g.addEventListener('mouseleave', () => ring && ring.classList.remove('expand'));
   });
-});
+})();
 
 /* ---- QUALIFICATION TABS ---- */
 document.querySelectorAll('.qual__tab').forEach(tab => {
@@ -403,7 +414,7 @@ if (contactForm) {
       points: ['AI farm advisor on Gemini with voice input, in English, Hindi, Bengali, Tamil and Telugu', 'Crop and fertilizer recommendation using Random Forest models trained on Kaggle datasets', 'Leaf-photo disease detection through Gemini Vision, with a MobileNetV2 model kept as backup', 'Live weather forecast and mandi prices; all API keys stay on the FastAPI backend'],
       metrics: [[6, 'Modules'], [5, 'Languages'], [99.3, 'Crop-model accuracy', '%', 1]],
       tags: ['Python', 'FastAPI', 'Scikit-learn', 'TensorFlow', 'Gemini API', 'OpenWeatherMap', 'API Ninjas', 'MongoDB Atlas', 'Vercel', 'Render'],
-      live: 'https://agro-pulse-two.vercel.app', gh: 'https://github.com/codersayan0/AgroPulse' },
+      live: 'https://agro-pulse-two.vercel.app' },
     { name: 'SmartRoom', fc: '#7b2fff', cat: ['fullstack', 'backend'], img: 'images/projects/smartroom.webp', status: 'Deployed',
       tag: 'Intelligent classroom management platform',
       desc: 'A classroom platform where students sign in through a two-step check and teachers get a clear view of content, access requests and session activity.',

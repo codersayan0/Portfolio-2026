@@ -1978,3 +1978,129 @@ a.contact__val:hover { color: var(--accent); }
   .pmodal[open], .pmodal[open]::backdrop, .pm__body > .pm__col > * { animation: none; }
   .home__name .ch { opacity: 1; transform: none; }
 }
+
+
+/* ================================================================
+   SKILL GROUPS — category cards with animated chips
+   ================================================================ */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.skill-group {
+  --mx: 50%; --my: 50%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 1.6rem 1.5rem 1.7rem;
+  background: linear-gradient(160deg, rgba(22,22,38,0.92), rgba(12,12,22,0.92));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1),
+              border-color .35s ease, box-shadow .35s ease;
+  transition-delay: calc(var(--g) * 90ms), calc(var(--g) * 90ms), 0s, 0s;
+}
+.skill-group.in { opacity: 1; transform: none; }
+.skill-group.in:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,245,212,0.45);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.55), 0 0 40px rgba(0,245,212,0.12);
+  transition-delay: 0s;
+}
+/* cursor-following spotlight */
+.skill-group::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(0,245,212,0.13), transparent 60%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.skill-group:hover::before { opacity: 1; }
+/* sweeping light beam on top edge */
+.skill-group__beam {
+  position: absolute; top: 0; left: -40%; width: 40%; height: 2px; z-index: 1;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: sgBeam 5s ease-in-out infinite;
+  animation-delay: calc(var(--g) * -1s);
+}
+@keyframes sgBeam { 0% { left: -40%; } 60%,100% { left: 110%; } }
+
+.skill-group__head {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+.skill-group__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 50px; height: 50px;
+  display: grid; place-items: center;
+  font-size: 1.15rem;
+  color: var(--accent);
+  background: rgba(0,245,212,0.08);
+  border: 1px solid rgba(0,245,212,0.25);
+  border-radius: 14px;
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease, transform .4s ease;
+}
+.skill-group__icon::after {           /* pulse ring */
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  border: 1px solid var(--accent);
+  animation: sgPulse 2.8s ease-out infinite;
+  animation-delay: calc(var(--g) * -.5s);
+  pointer-events: none;
+}
+@keyframes sgPulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.5); opacity: 0; } }
+.skill-group:hover .skill-group__icon {
+  background: var(--accent); color: #080811;
+  box-shadow: 0 0 26px rgba(0,245,212,0.5);
+  transform: rotate(-8deg) scale(1.08);
+}
+.skill-group__title {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--white); line-height: 1.2;
+}
+
+.skill-group__chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+.skill-chip {
+  font-family: var(--font-display);
+  font-size: .82rem; font-weight: 600;
+  color: #cfcfe2;
+  padding: .45rem .9rem;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(10px) scale(.85);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.3,1.5,.5,1),
+              color .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.skill-group.in .skill-chip {
+  opacity: 1; transform: none;
+  transition-delay: calc(var(--g) * 90ms + 250ms + var(--i) * 55ms), calc(var(--g) * 90ms + 250ms + var(--i) * 55ms), 0s, 0s, 0s, 0s;
+}
+.skill-group.in .skill-chip:hover {
+  transform: translateY(-3px) scale(1.06);
+  color: #fff;
+  background: rgba(0,245,212,0.12);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(0,245,212,0.25);
+  transition-delay: 0s;
+}
+
+@media (max-width: 1000px) { .skill-groups { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .skill-groups { grid-template-columns: 1fr; } .skill-group { padding: 1.3rem 1.1rem 1.4rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .skill-group, .skill-chip { opacity: 1; transform: none; transition: none; }
+  .skill-group__beam, .skill-group__icon::after { animation: none; }
+}
+
+/* chip icons */
+.skill-chip { display: inline-flex; align-items: center; gap: .5rem; }
+.skill-chip img { width: 16px; height: 16px; object-fit: contain; flex: 0 0 auto; }
+.skill-chip img.mono { filter: invert(1) brightness(1.1); }
+.skill-chip i { font-size: .8rem; color: var(--accent); width: 16px; text-align: center; flex: 0 0 auto; transition: transform .3s ease; }
+.skill-chip img, .skill-chip i { transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+.skill-chip:hover img, .skill-chip:hover i { transform: scale(1.25) rotate(-8deg); }
