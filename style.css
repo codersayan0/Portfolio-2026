@@ -17,8 +17,8 @@
   --border:       rgba(0, 245, 212, 0.1);
   --border2:      rgba(255, 255, 255, 0.06);
   --text:         #e2e2f0;
-  --text-muted:   #7a7a9d;
-  --text-dim:     #3d3d5c;
+  --text-muted:   #a9a9bf;
+  --text-dim:     #9696ad;
   --white:        #ffffff;
   --font-display: 'Syne', sans-serif;
   --font-mono:    'Space Mono', monospace;
@@ -1728,7 +1728,7 @@ a.contact__val:hover { color: var(--accent); }
   color: var(--text);
   opacity: 0; transform: translateY(10px);
   animation: chipIn 0.6s ease forwards;
-  animation-delay: calc(3.4s + var(--d) * 0.12s);
+  animation-delay: calc(0.15s + var(--d) * 0.12s);
 }
 .home__chips li i { color: var(--accent); }
 @keyframes chipIn { to { opacity: 1; transform: translateY(0); } }
@@ -2104,3 +2104,7 @@ a.contact__val:hover { color: var(--accent); }
 .skill-chip i { font-size: .8rem; color: var(--accent); width: 16px; text-align: center; flex: 0 0 auto; transition: transform .3s ease; }
 .skill-chip img, .skill-chip i { transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
 .skill-chip:hover img, .skill-chip:hover i { transform: scale(1.25) rotate(-8deg); }
+
+/* v5: accessible, project-first developer experience */
+:root{--font-body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{font-family:var(--font-body);background:radial-gradient(ellipse at 80% 8%,#181630 0,transparent 42%),radial-gradient(ellipse at 10% 35%,#092426 0,transparent 34%),var(--bg)}
+#intro-loader[hidden]{display:none!important}.bg-video,.bg-video-overlay{display:none}.home__greeting,.section-tag,.home__chips{font-family:var(--font-mono)}.home__role{color:var(--accent);background:none;-webkit-text-fill-color:initial;animation:none}.availability{display:inline-flex;align-items:center;gap:.55rem;font-size:.82rem;color:var(--text-muted);border:1px solid var(--border);padding:.35rem .7rem;border-radius:30px;margin-bottom:1rem}.availability span{width:8px;height:8px;border-radius:50%;background:var(--accent)}.skip-link{position:fixed;left:1rem;top:-100px;z-index:100001;background:var(--accent);color:#080811;padding:.7rem}.skip-link:focus{top:1rem} :focus-visible{outline:2px solid var(--accent);outline-offset:4px}section[id]{scroll-margin-top:85px}@media(max-width:768px){#bg-canvas,.cursor-dot,.cursor-ring{display:none!important}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.home__chips li,.reveal,.pcard{opacity:1!important;transform:none!important}.cursor-dot,.cursor-ring{display:none!important}}

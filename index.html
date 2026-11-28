@@ -8,14 +8,27 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <script id="three-library" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" async></script>
+  <meta name="theme-color" content="#080811">
+  <link rel="canonical" href="https://codersayan.vercel.app/">
+  <meta property="og:title" content="Sayan Mandal — Python &amp; AI Developer">
+  <meta property="og:description" content="Selected AI applications, backend systems and DevOps projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://codersayan.vercel.app/">
+  <meta property="og:image" content="https://codersayan.vercel.app/images/projects/medimitra.webp">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <noscript><style>#intro-loader{display:none!important}.home__chips li{opacity:1!important;transform:none!important}.nav__list{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+  <link rel="stylesheet" href="chatbot/widget.css">
+  <link rel="stylesheet" href="features/portfolio.css">
+  <script src="features/preferences.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- ===== INTRO LOADER ===== -->
-<div id="intro-loader">
+<div id="intro-loader" hidden>
   <div class="intro__words">
     <span class="intro__word" id="iw1">Hii</span>
     <span class="intro__word" id="iw2">Hello</span>
@@ -26,9 +39,9 @@
 </div>
   
   <!-- VIDEO BACKGROUND -->
-  <video class="bg-video" id="bg-video" autoplay muted loop playsinline preload="auto" poster="video/poster.jpg" aria-hidden="true">
-    <source src="video/bg.webm" type="video/webm" />
-    <source src="video/bg.mp4" type="video/mp4" />
+  <video class="bg-video" id="bg-video" muted loop playsinline preload="none" poster="video/poster.jpg" aria-hidden="true">
+    <source data-src="video/bg.webm" type="video/webm" />
+    <source data-src="video/bg.mp4" type="video/mp4" />
   </video>
   <div class="bg-video-overlay" aria-hidden="true"></div>
 
@@ -48,27 +61,30 @@
         <li><a href="#home"          class="nav__link active-link">Home</a></li>
         <li><a href="#about"         class="nav__link">About</a></li>
         <li><a href="#skills"        class="nav__link">Skills</a></li>
+        <li><a href="#projects"      class="nav__link">Projects</a></li>
         <li><a href="#qualification" class="nav__link">Journey</a></li>
         <li><a href="#certifications" class="nav__link">Certifications</a></li>
-        <li><a href="#projects"      class="nav__link">Projects</a></li>
+        <li><a href="#playground" class="nav__link">Playground</a></li>
         <li><a href="#contact"       class="nav__link">Contact</a></li>
       </ul>
-      <button class="nav__hamburger" id="nav-toggle" aria-label="Menu">
+      <div class="v6-nav-tools"><button type="button" id="theme-toggle" class="v6-icon" aria-label="Switch to light theme" title="Change color theme">☀</button></div>
+      <button class="nav__hamburger" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
 
     <!-- ===== HOME ===== -->
     <section class="home section" id="home">
       <div class="home__container container">
         <div class="home__text">
-          <p class="home__greeting">&gt; Hello, World! <span class="blink">_</span></p>
+          <p class="availability"><span></span> Open to internships &amp; collaborations</p>
+          <p class="home__greeting">&gt; <span id="time-greeting">Hello, World!</span> <span class="blink">_</span></p>
           <h1 class="home__name">Sayan<br /><span>Mandal</span></h1>
-          <p class="home__role">Python Developer | AI &amp; ML Engineering</p>
-          <p class="home__intro">I build practical web applications and AI-powered tools using Python, FastAPI, and modern development technologies.</p>
+          <p class="home__role">Python Developer · Generative AI &amp; Backend</p>
+          <p class="home__intro">I turn complex problems into practical AI applications, reliable APIs and cloud-ready software. Explore the systems I have built and the engineering behind them.</p>
           <ul class="home__chips" aria-label="Focus areas">
             <li style="--d:0"><i class="fab fa-python"></i> Python</li>
             <li style="--d:1"><i class="fas fa-bolt"></i> FastAPI</li>
@@ -77,20 +93,25 @@
           </ul>
           <p class="home__sub">// B.Tech Computer Science &amp; Engineering · SVIST · 2023–2027</p>
           <div class="home__btns">
-            <a href="#contact" class="btn btn--primary">Get In Touch <i class="fas fa-arrow-right"></i></a>
-            <a href="https://drive.google.com/uc?export=download&id=1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo" class="btn btn--ghost" download>Download CV <i class="fas fa-download"></i></a>
+            <a href="#projects" class="btn btn--primary">Explore My Work <i class="fas fa-arrow-right"></i></a>
+            <a href="https://drive.google.com/uc?export=download&id=1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">Download CV <i class="fas fa-download"></i></a>
+          </div>
+          <div class="v6-actions" aria-label="Portfolio tools">
+            <button type="button" class="v6-pill" data-open-resume>▤ Preview CV</button>
+            <button type="button" class="v6-pill" data-open-share>↗ Share / QR</button>
+            <a href="#playground" class="v6-pill">⌘ Python Playground</a>
           </div>
           <div class="home__socials">
-            <a href="https://github.com/codersayan0" target="_blank" rel="noopener" aria-label="GitHub">
+            <a href="https://github.com/codersayan0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <i class="fab fa-github"></i>
             </a>
-            <a href="mailto:sayanmandal6297@gmail.com" aria-label="Email">
+            <a href="mailto:sayanmandal7212@gmail.com" aria-label="Email">
               <i class="fas fa-envelope"></i>
             </a>
-            <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener" aria-label="Twitter/X">
+            <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
               <i class="fab fa-x-twitter"></i>
             </a>
           </div>
@@ -169,6 +190,7 @@
       </a>
     </section>
 
+
     <!-- ===== ABOUT ===== -->
     <section class="about section" id="about">
       <div class="container">
@@ -185,15 +207,15 @@
             </div>
             <div class="about__stats">
               <div class="stat-card">
-                <span class="stat-num" data-count="6">0</span>
+                <span class="stat-num" data-count="6">6</span>
                 <span class="stat-label">Projects Showcased</span>
               </div>
               <div class="stat-card">
-                <span class="stat-num" data-count="2">0</span>
+                <span class="stat-num" data-count="2">2</span>
                 <span class="stat-label">Internships</span>
               </div>
               <div class="stat-card">
-                <span class="stat-num" data-count="7">0</span>
+                <span class="stat-num" data-count="7">7</span>
                 <span class="stat-label">Certifications</span>
               </div>
             </div>
@@ -224,9 +246,10 @@
               <span class="tag">MongoDB</span>
               <span class="tag">MySQL</span>
             </div>
-            <a href="https://drive.google.com/file/d/1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo/view" class="btn btn--primary" target="_blank" rel="noopener">
+            <a href="https://drive.google.com/file/d/1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo/view" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
               Resume <i class="fas fa-file-download"></i>
             </a>
+            <button type="button" class="btn btn--ghost" data-open-resume>Preview Resume</button>
           </div>
         </div>
       </div>
@@ -412,6 +435,26 @@
       </div>
     </section>
 
+    <!-- ===== PROJECTS (cards are rendered from the PROJECTS array in main.js) ===== -->
+    <section class="projects section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// featured work</span>
+          <h2 class="section-title">Projects</h2>
+        </div>
+        <div class="pfilter" id="pfilter" role="group" aria-label="Filter projects">
+          <button class="active" data-f="all" aria-pressed="true">All</button>
+          <button aria-pressed="false" data-f="ai">AI / ML</button>
+          <button aria-pressed="false" data-f="backend">Backend</button>
+          <button aria-pressed="false" data-f="fullstack">Full-stack</button>
+          <button aria-pressed="false" data-f="devops">DevOps</button>
+        </div>
+        <div class="pgrid" id="pgrid"><article class="pcard in" style="--fc:#06b6d4"><div class="pcard__img"><img src="images/projects/medimitra.webp" alt="MediMitra preview" loading="lazy"></div><div class="pcard__body"><h3>MediMitra</h3><p>AI-powered multilingual healthcare platform</p><div class="pcard__tags"><span>React</span><span>Vite</span><span>TypeScript</span></div><a class="project-card__btn" href="https://medimitra-codersayan.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo</a> </div></article><article class="pcard in" style="--fc:#22c55e"><div class="pcard__img"><img src="images/projects/agropulse.webp" alt="AgroPulse preview" loading="lazy"></div><div class="pcard__body"><h3>AgroPulse</h3><p>AI farm advisory for Indian farmers</p><div class="pcard__tags"><span>Python</span><span>FastAPI</span><span>Scikit-learn</span></div><a class="project-card__btn" href="https://agro-pulse-two.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a> </div></article><article class="pcard in" style="--fc:#7b2fff"><div class="pcard__img"><img src="images/projects/smartroom.webp" alt="SmartRoom preview" loading="lazy"></div><div class="pcard__body"><h3>SmartRoom</h3><p>Intelligent classroom management platform</p><div class="pcard__tags"><span>Python</span><span>FastAPI</span><span>MongoDB Atlas</span></div><a class="project-card__btn" href="https://smart-classroom-sayan.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a> <a class="project-card__btn" href="https://github.com/codersayan0/SmartClassroom" target="_blank" rel="noopener noreferrer">Source code</a> </div></article><article class="pcard in" style="--fc:#f59e0b"><div class="pcard__img"><img src="images/projects/mediadrop.webp" alt="MediaDrop DevOps preview" loading="lazy"></div><div class="pcard__body"><h3>MediaDrop DevOps</h3><p>Cloud-native video-to-audio platform</p><div class="pcard__tags"><span>Python</span><span>FastAPI</span><span>Docker</span></div><a class="project-card__btn" href="https://video-audio-devops.onrender.com/" target="_blank" rel="noopener noreferrer">Live demo</a> <a class="project-card__btn" href="https://github.com/codersayan0/video-audio-devops" target="_blank" rel="noopener noreferrer">Source code</a> </div></article><article class="pcard in" style="--fc:#a855f7"><div class="pcard__img"><img src="images/projects/chatbot.webp" alt="Sayan&#x27;s Chatbot preview" loading="lazy"></div><div class="pcard__body"><h3>Sayan&#x27;s Chatbot</h3><p>Multimodal AI chatbot with voice, text and image input</p><div class="pcard__tags"><span>Python</span><span>Gemini API</span><span>Gradio</span></div><a class="project-card__btn" href="https://github.com/codersayan0/Sayan-Chatbot" target="_blank" rel="noopener noreferrer">Source code</a> </div></article><article class="pcard in" style="--fc:#ec4899"><div class="pcard__img"><img src="images/projects/jarves.webp" alt="Jarvis preview" loading="lazy"></div><div class="pcard__body"><h3>Jarvis</h3><p>Python voice assistant built on NLP and automation</p><div class="pcard__tags"><span>Python</span><span>NLP</span><span>Automation</span></div><a class="project-card__btn" href="https://github.com/codersayan0/Jarvis" target="_blank" rel="noopener noreferrer">Source code</a> </div></article></div>
+        <noscript><p style="color:var(--text-muted)">For more projects, visit <a href="https://github.com/codersayan0" style="color:var(--accent)">github.com/codersayan0</a>.</p></noscript>
+      </div>
+    </section>
+    <dialog class="pmodal" id="pmodal" aria-label="Project details"></dialog>
+
 <!-- ===== QUALIFICATION ===== -->
 <section class="qualification section" id="qualification">
   <div class="container">
@@ -441,7 +484,7 @@
             <div class="tl__tags">
               <span>Generative AI</span><span>Python</span><span>LLMs</span>
             </div>
-            <a href="https://drive.google.com/file/d/1Rw8QGQlHX5m_1Y_5PMapULOsVtktyjHo/view" target="_blank" class="tl__link">
+            <a href="https://drive.google.com/file/d/1Rw8QGQlHX5m_1Y_5PMapULOsVtktyjHo/view" target="_blank" rel="noopener noreferrer" class="tl__link">
               <i class="fas fa-external-link-alt"></i> Certificate
             </a>
           </div>
@@ -458,10 +501,10 @@
               <span>Python</span><span>Automation</span><span>Scripting</span>
             </div>
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/169kEn7HpCz-diBqPrslKQ7dKbbbp3CH-/view" target="_blank" class="tl__link">
+              <a href="https://drive.google.com/file/d/169kEn7HpCz-diBqPrslKQ7dKbbbp3CH-/view" target="_blank" rel="noopener noreferrer" class="tl__link">
                 <i class="fas fa-external-link-alt"></i> Offer Letter
               </a>
-              <a href="https://drive.google.com/file/d/14aFdmzjU3z3S3-x0rxcDSJCfSqD4CxoO/view" target="_blank" class="tl__link">
+              <a href="https://drive.google.com/file/d/14aFdmzjU3z3S3-x0rxcDSJCfSqD4CxoO/view" target="_blank" rel="noopener noreferrer" class="tl__link">
                 <i class="fas fa-external-link-alt"></i> Certificate
               </a>
             </div>
@@ -479,10 +522,10 @@
               <span>Python</span><span>Teamwork</span><span>Development</span>
             </div>
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <a href="https://drive.google.com/file/d/18WNa2wYyprgCUK8kRhjLg2LTBmbMA6XS/view" target="_blank" class="tl__link">
+              <a href="https://drive.google.com/file/d/18WNa2wYyprgCUK8kRhjLg2LTBmbMA6XS/view" target="_blank" rel="noopener noreferrer" class="tl__link">
                 <i class="fas fa-external-link-alt"></i> Offer Letter
               </a>
-              <a href="https://drive.google.com/file/d/1Vx5scz7SVKC7YeHk1hdJIZKQv7Fw1yoh/view" target="_blank" class="tl__link">
+              <a href="https://drive.google.com/file/d/1Vx5scz7SVKC7YeHk1hdJIZKQv7Fw1yoh/view" target="_blank" rel="noopener noreferrer" class="tl__link">
                 <i class="fas fa-external-link-alt"></i> Certificate
               </a>
             </div>
@@ -528,7 +571,7 @@
           <div class="timeline__dot"></div>
           <div class="timeline__card">
             <span class="tl__year"><i class="fas fa-calendar-alt"></i> 2023 – 2027</span>
-            <h3>B.Tech — Computer Science Engineering</h3>
+            <h3>B.Tech — Computer Science Engineering </h3>
             <p class="tl__org"><i class="fas fa-university"></i> Swami Vivekananda Institute of Science & Technology, Kolkata</p>
             <p class="tl__desc">Pursuing core CS — Data Structures, Algorithms, OOP, OS, DBMS, and Computer Networks.</p>
             <div class="tl__tags">
@@ -588,7 +631,7 @@
           <h3 class="cert__title">Generative AI</h3>
           <span class="cert__issuer">ExcelR, Kolkata</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Jul 2025</span>
-          <a href="https://drive.google.com/file/d/1Mos5b7fZ78HRJHjki4sRz-1_WoA1t7Cp/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1Mos5b7fZ78HRJHjki4sRz-1_WoA1t7Cp/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -602,7 +645,7 @@
           <h3 class="cert__title">MERN Stack Development</h3>
           <span class="cert__issuer">ExcelR, Kolkata</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Jul 2025</span>
-          <a href="https://drive.google.com/file/d/1S19VDURzGOiafKr-8vWtqk2uQiSpS7aR/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1S19VDURzGOiafKr-8vWtqk2uQiSpS7aR/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -616,7 +659,7 @@
           <h3 class="cert__title">Python Programming</h3>
           <span class="cert__issuer">Udemy</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Aug 2025</span>
-          <a href="https://drive.google.com/file/d/1pUNl3bGKNZbT3Bsg-n-pGjk3ocChURgC/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1pUNl3bGKNZbT3Bsg-n-pGjk3ocChURgC/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -630,7 +673,7 @@
           <h3 class="cert__title">DevOps</h3>
           <span class="cert__issuer">Oracle University</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Sep 2025</span>
-          <a href="https://drive.google.com/file/d/1IYqJfDMr8Zvauv5QsDiZNzNWrgzuHDpl/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1IYqJfDMr8Zvauv5QsDiZNzNWrgzuHDpl/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -644,7 +687,7 @@
           <h3 class="cert__title">Data Science</h3>
           <span class="cert__issuer">Oracle University</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Sep 2025</span>
-          <a href="https://drive.google.com/file/d/1msnNpDWNjy17YmedqFfD6SzAPalqwdbA/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1msnNpDWNjy17YmedqFfD6SzAPalqwdbA/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -658,7 +701,7 @@
           <h3 class="cert__title">Data Structures & Algorithms</h3>
           <span class="cert__issuer">Great Learning</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Aug 2024</span>
-          <a href="https://drive.google.com/file/d/1_lfD6GAPE02oWzki3HRy1eHya9UjQ0G-/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1_lfD6GAPE02oWzki3HRy1eHya9UjQ0G-/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -672,7 +715,7 @@
           <h3 class="cert__title">Machine Learning & Data Analytics</h3>
           <span class="cert__issuer">I-HR Technology Solutions</span>
           <span class="cert__date"><i class="fas fa-calendar-alt"></i> Jul 2024</span>
-          <a href="https://drive.google.com/file/d/1-TquJsjzmp5q8yz_rnmQtIOezaXO1L8d/view" target="_blank" class="cert__link">
+          <a href="https://drive.google.com/file/d/1-TquJsjzmp5q8yz_rnmQtIOezaXO1L8d/view" target="_blank" rel="noopener noreferrer" class="cert__link">
             <i class="fas fa-external-link-alt"></i> View Certificate
           </a>
         </div>
@@ -682,27 +725,17 @@
   </div>
 </section>
 
-    <!-- ===== PROJECTS (cards are rendered from the PROJECTS array in main.js) ===== -->
-    <section class="projects section" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">// featured work</span>
-          <h2 class="section-title">Projects</h2>
-        </div>
-        <div class="pfilter" id="pfilter" role="group" aria-label="Filter projects">
-          <button class="active" data-f="all">All</button>
-          <button data-f="ai">AI / ML</button>
-          <button data-f="backend">Backend</button>
-          <button data-f="fullstack">Full-stack</button>
-          <button data-f="devops">DevOps</button>
-        </div>
-        <div class="pgrid" id="pgrid"></div>
-        <noscript><p style="color:var(--text-muted)">Enable JavaScript to see projects, or visit <a href="https://github.com/codersayan0" style="color:var(--accent)">github.com/codersayan0</a>.</p></noscript>
-      </div>
-    </section>
-    <dialog class="pmodal" id="pmodal" aria-label="Project details"></dialog>
+
+
 
  <!-- ===== CONTACT ===== -->
+
+<section id="playground" class="section v6-section">
+  <div class="container"><div class="section-header"><span class="section-tag">// interactive lab</span><h2 class="section-title">Python Playground</h2><p class="v6-muted">Write and execute Python in your browser. No server or AI API required.</p></div>
+  <div class="v6-panel"><div class="v6-toolbar"><label for="python-example">Example</label><select id="python-example"><option value="hello">Hello, Python</option><option value="fibonacci">Fibonacci</option><option value="data">Data analysis</option><option value="algorithm">Binary search</option></select><button type="button" class="v6-pill" id="python-reset">Reset example</button></div>
+  <div class="v6-editor-grid"><div><label for="python-code" class="v6-label">main.py</label><textarea id="python-code" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="20000" rows="12">print("Hello from CoderSayan!")</textarea></div><div><p class="v6-label">Console output</p><pre id="python-output" tabindex="0" aria-live="polite">Ready. Choose an example or write your own code.</pre></div></div>
+  <div class="v6-toolbar"><button type="button" class="btn btn--primary" id="python-run">▶ Run Python</button><button type="button" class="v6-pill" id="python-stop" disabled>■ Stop</button><button type="button" class="v6-pill" id="python-clear">Clear output</button><button type="button" class="v6-pill" id="python-download">Save .py</button><span id="python-status" class="v6-muted" role="status">Runtime loads on demand.</span></div><p class="v6-muted">First run downloads the real Python runtime from a CDN. Open this site using localhost or HTTPS, not by double-clicking index.html. If the runtime is blocked, save your code as a .py file and run it with Python on your computer. Runs are time-limited. Only run code you trust.</p></div></div>
+</section>
 <section class="contact section" id="contact">
   <div class="container">
     <div class="section-header">
@@ -738,21 +771,21 @@
             <div class="contact__icon"><i class="fab fa-github"></i></div>
             <div>
               <span class="contact__label">GitHub</span>
-              <a href="https://github.com/codersayan0" target="_blank" rel="noopener" class="contact__val">codersayan0</a>
+              <a href="https://github.com/codersayan0" target="_blank" rel="noopener noreferrer" class="contact__val">codersayan0</a>
             </div>
           </div>
         </div>
         <div class="contact__socials">
-          <a href="https://github.com/codersayan0" target="_blank" rel="noopener" class="social-pill">
+          <a href="https://github.com/codersayan0" target="_blank" rel="noopener noreferrer" class="social-pill">
             <i class="fab fa-github"></i> GitHub
           </a>
-          <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener" class="social-pill">
+          <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener noreferrer" class="social-pill">
             <i class="fab fa-linkedin"></i> LinkedIn
           </a>
-          <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener" class="social-pill">
+          <a href="https://x.com/sayanmandal0" target="_blank" rel="noopener noreferrer" class="social-pill">
             <i class="fab fa-x-twitter"></i> Twitter
           </a>
-          <a href="https://www.youtube.com/@codersayan0" target="_blank" rel="noopener" class="social-pill">
+          <a href="https://www.youtube.com/@codersayan0" target="_blank" rel="noopener noreferrer" class="social-pill">
             <i class="fab fa-youtube"></i> YouTube
           </a>
         </div>
@@ -763,25 +796,25 @@
 
         <div class="form-row">
           <div class="form-group">
-            <input type="text" name="user_name" id="user_name"
-              placeholder=" " required autocomplete="off" />
+            <input type="text" name="user_name" id="user_name" maxlength="100"
+              placeholder=" " required autocomplete="on" />
             <label for="user_name">Your Name</label>
           </div>
           <div class="form-group">
-            <input type="email" name="user_email" id="user_email"
-              placeholder=" " required autocomplete="off" />
+            <input type="email" name="user_email" id="user_email" maxlength="254"
+              placeholder=" " required autocomplete="on" />
             <label for="user_email">Your Email</label>
           </div>
         </div>
 
         <div class="form-group">
-          <input type="text" name="subject" id="subject"
-            placeholder=" " autocomplete="off" />
+          <input type="text" name="subject" id="subject" maxlength="150"
+            placeholder=" " autocomplete="on" />
           <label for="subject">Subject <span class="optional">(optional)</span></label>
         </div>
 
         <div class="form-group">
-          <textarea name="message" id="message"
+          <textarea name="message" id="message" maxlength="3000"
             rows="5" placeholder=" " required></textarea>
           <label for="message">Your Message</label>
         </div>
@@ -791,9 +824,9 @@
           <i class="fas fa-paper-plane" id="btn-icon"></i>
         </button>
 
-        <div class="form-feedback" id="form-feedback"></div>
+        <div class="form-feedback" id="form-feedback" role="status" aria-live="polite"></div>
 
-        <p class="form-note">// Powered by CoderSayan · Reply within 24h</p>
+        <p class="form-note">// Powered by CoderSayan · Direct email available</p>
       </form>
 
     </div>
@@ -810,16 +843,16 @@
     </p>
 
     <div class="footer__socials">
-      <a href="https://github.com/codersayan0" target="_blank" rel="noopener" aria-label="GitHub">
+      <a href="https://github.com/codersayan0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
-      <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/codersayan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="https://www.facebook.com/share/1CxVH6Aykj/" target="_blank" rel="noopener" aria-label="Facebook">
+      <a href="https://www.facebook.com/share/1CxVH6Aykj/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
         <i class="fab fa-facebook"></i>
       </a>
-      <a href="https://www.instagram.com/mr.sayan.mandal" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="https://www.instagram.com/mr.sayan.mandal" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <i class="fab fa-instagram"></i>
       </a>
     </div>
@@ -827,8 +860,11 @@
     <div class="footer__links">
       <a href="#home">Home</a>
       <a href="#about">About</a>
+      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
+      <a href="#playground">Playground</a>
+      <button type="button" data-open-share class="v6-footer-button">Share / QR</button>
     </div>
   </div>
 </footer>
@@ -837,18 +873,38 @@
     <i class="fas fa-chevron-up"></i>
   </a>
 
-  <div class="toast" id="toast"></div>
+  <!-- Floating portfolio assistant -->
+  <div id="chat-welcome" class="chat-welcome" hidden>
+    <button type="button" id="chat-welcome-open" class="chat-welcome-text"><strong>Hi there! 👋</strong><span>Welcome to my portfolio. Have a question about me?</span></button>
+    <button type="button" id="chat-welcome-close" class="chat-welcome-close" aria-label="Dismiss welcome message">×</button>
+  </div>
+  <button id="chat-launch" type="button" aria-expanded="false" aria-controls="sayan-chat" aria-label="Open portfolio assistant"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M24 10V5m-3 0h6M9 22H5v9h4m30-9h4v9h-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="12" width="30" height="27" rx="9" stroke="currentColor" stroke-width="2.5"/><circle cx="18" cy="24" r="2.7" fill="currentColor"/><circle cx="30" cy="24" r="2.7" fill="currentColor"/><path d="M19 31c2.8 2.8 7.2 2.8 10 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <aside id="sayan-chat" role="region" aria-labelledby="chat-title" hidden>
+    <header class="chat-header"><span class="chat-avatar"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M24 10V5m-3 0h6M9 22H5v9h4m30-9h4v9h-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="12" width="30" height="27" rx="9" stroke="currentColor" stroke-width="2.5"/><circle cx="18" cy="24" r="2.7" fill="currentColor"/><circle cx="30" cy="24" r="2.7" fill="currentColor"/><path d="M19 31c2.8 2.8 7.2 2.8 10 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div class="chat-heading"><h2 id="chat-title">Portfolio Assistant</h2><p>Local AI · Private chat</p></div><button type="button" class="chat-icon-btn" id="chat-reset" aria-label="Start new chat"><span aria-hidden="true">↻</span></button><button type="button" class="chat-icon-btn" id="chat-close" aria-label="Close chat"><span aria-hidden="true">×</span></button></header>
+    <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-label="Chat messages"></div>
+    <div class="chat-bottom"><div class="chat-suggestions" aria-label="Suggested questions"><button type="button" data-question="Tell me about yourself">About</button><button type="button" data-question="What projects has he built?">Projects</button><button type="button" data-question="What are your skills?">Skills</button><button type="button" data-question="Internship experience">Experience</button><button type="button" data-question="View CV">Resume</button></div>
+      <form class="chat-form" id="chat-form"><label class="chat-sr-only" for="chat-input">Ask about Sayan</label><input id="chat-input" type="text" maxlength="500" autocomplete="off" placeholder="Type your question…" required><button type="submit" id="chat-send" aria-label="Send question"><span aria-hidden="true">➤</span></button></form>
+      <p class="chat-status" id="chat-status" role="status">Local trained model · No API key</p><p class="chat-privacy">Your chat stays in this browser.</p>
+    </div>
+  </aside>
+
+
+<dialog id="resume-dialog" class="v6-dialog" aria-labelledby="resume-title"><div class="v6-dialog-head"><div><span class="v6-kicker">CAREER PROFILE</span><h2 id="resume-title">Resume viewer</h2></div><button type="button" class="v6-icon" data-close-dialog aria-label="Close resume">×</button></div><p class="v6-muted">Your professional profile is available immediately. The original resume PDF is hosted on Google Drive and may require internet access and sharing permissions.</p><div class="v6-toolbar"><a class="v6-pill" href="https://drive.google.com/file/d/1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo/view" target="_blank" rel="noopener noreferrer">Open PDF ↗</a><a class="v6-pill" href="https://drive.google.com/uc?export=download&amp;id=1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo" target="_blank" rel="noopener noreferrer">↓ Download</a><button type="button" id="resume-print" class="v6-pill">Print profile</button><button type="button" id="resume-load" class="v6-pill" aria-expanded="false">Load original PDF preview</button></div><p id="resume-status" class="v6-muted" role="status"></p><iframe id="resume-frame" title="Google Drive resume PDF preview" hidden></iframe><details open><summary>Offline profile summary (not the PDF)</summary><div class="v6-profile"><h3>Sayan Mandal</h3><p>Python Developer · Generative AI &amp; Backend</p><p>B.Tech Computer Science &amp; Engineering · SVIST · 2023–2027</p><p>Internships: Cognifyz Technology and BroskiesHub</p><p>Skills: Python, FastAPI, Flask, Django, Machine Learning, Docker, MongoDB, MySQL</p><p>Projects: MediMitra, AgroPulse, SmartRoom, MediaDrop DevOps, Sayan’s Chatbot, Jarvis</p><p>Email: sayanmandal7212@gmail.com · <a href="https://github.com/codersayan0">github.com/codersayan0</a></p></div></details></dialog>
+<dialog id="share-dialog" class="v6-dialog v6-share" aria-labelledby="share-title"><div class="v6-dialog-head"><div><span class="v6-kicker">CONNECT &amp; SHARE</span><h2 id="share-title">Share portfolio</h2></div><button type="button" class="v6-icon" data-close-dialog aria-label="Close share">×</button></div><img src="images/portfolio-qr.png" width="320" height="320" alt="QR code for https://codersayan.vercel.app/"><p class="v6-muted">Scan to open the portfolio on another device.</p><label for="share-url" class="v6-label">Portfolio URL</label><input id="share-url" readonly value="https://codersayan.vercel.app/"><div class="v6-toolbar"><button type="button" class="v6-pill" id="copy-url">Copy link</button><a class="v6-pill" href="images/portfolio-qr.png" download="CoderSayan-QR.png">↓ Save QR</a><button type="button" class="v6-pill" id="native-share" hidden>Share</button></div><p id="share-status" class="v6-muted" role="status"></p></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" onload="window.emailjs?.init({publicKey: &quot;cmzysj1m3xH3P_Lme&quot;})"></script>
 
-  <!-- Init EmailJS with your public key -->
-  <script>
-    emailjs.init({ publicKey: "cmzysj1m3xH3P_Lme" });
-  </script>
+
 
   <!-- Main script — NO defer -->
   <script src="main.js"></script>
+  <script src="chatbot/model-data.js"></script>
+  <script src="chatbot/engine.js"></script>
+  <script src="chatbot/widget.js"></script>
+  <script src="features/portfolio.js"></script>
 
 </body>
 </html>

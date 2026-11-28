@@ -1,0 +1,930 @@
+[
+  {
+    "id": "about",
+    "answer": "Sayan Mandal is a B.Tech Computer Science & Engineering student (2023–2027) at Swami Vivekananda Institute of Science and Technology, Kolkata. His focus is Python development, AI and backend engineering. He builds practical AI applications, web platforms and DevOps projects.",
+    "examples": [
+      "who is sayan",
+      "tell me about yourself",
+      "introduce yourself",
+      "about sayan mandal",
+      "who are you",
+      "tell me about him",
+      "what does sayan do",
+      "developer introduction",
+      "who owns this portfolio",
+      "what is your name",
+      "introduction",
+      "introduce",
+      "yourself",
+      "who is this developer",
+      "what is his professional background",
+      "introduce sayan in short",
+      "give me a short bio",
+      "describe yourself",
+      "tell me about the portfolio owner",
+      "what kind of developer is he",
+      "brief introduction about the developer",
+      "what is his main focus",
+      "what does he specialize in",
+      "who made this website",
+      "who built this portfolio",
+      "describe his background",
+      "tell me something about yourself",
+      "tell us about yourself",
+      "profile summary",
+      "developer profile"
+    ],
+    "links": [
+      {
+        "label": "About Sayan",
+        "url": "#about"
+      }
+    ]
+  },
+  {
+    "id": "greeting",
+    "answer": "Hi there! 👋 Welcome to Sayan’s portfolio. I’m his local portfolio assistant. Ask about his skills, education, projects, internships, certificates, resume or contact details.",
+    "examples": [
+      "hi",
+      "hello",
+      "hey",
+      "good morning",
+      "good evening",
+      "help",
+      "what can you do",
+      "how are you",
+      "hello there",
+      "hi there",
+      "hey there",
+      "good afternoon",
+      "nice to meet you",
+      "greetings",
+      "hello bot",
+      "hi bot",
+      "welcome",
+      "howdy"
+    ],
+    "links": []
+  },
+  {
+    "id": "skills",
+    "answer": "His portfolio lists C, C++, Python, Java, JavaScript and TypeScript; RAG, LLMs, TensorFlow/Keras, Scikit-learn, Gemini API, LangChain and prompt engineering; FastAPI, Flask, Django, REST APIs, Socket.IO and JWT; React, Vite, HTML/CSS; MongoDB, MySQL and PostgreSQL; Git, Docker, Kubernetes, Terraform, Linux, GitHub Actions, Vercel and CI/CD. These are self-reported skills, not proficiency certifications.",
+    "examples": [
+      "what are your skills",
+      "technical skills",
+      "tech stack",
+      "which languages",
+      "programming languages",
+      "what technologies does he know",
+      "does he know python",
+      "what can sayan code",
+      "technical expertise",
+      "developer skills",
+      "what is his strongest technical area",
+      "technical strengths",
+      "which tools does he use",
+      "what can he build",
+      "what programming languages does he use",
+      "list all technologies",
+      "what does he work with",
+      "skill set",
+      "coding skills",
+      "what frameworks does he know",
+      "what languages does he code in"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "ai",
+    "answer": "His AI/ML skills include RAG, LLMs, TensorFlow/Keras, Scikit-learn, Gemini API, LangChain and prompt engineering. MediMitra, AgroPulse and his multimodal chatbot demonstrate AI applications.",
+    "examples": [
+      "ai skills",
+      "machine learning experience",
+      "generative ai experience",
+      "does he know llms",
+      "rag experience",
+      "langchain",
+      "tensorflow",
+      "prompt engineering",
+      "artificial intelligence",
+      "artificial intelligence skills",
+      "what ai tools does he use",
+      "does he work with generative ai",
+      "machine learning frameworks",
+      "does he use rag",
+      "does he have experience with large language models",
+      "what about prompt engineering",
+      "does he build ai applications",
+      "which ml libraries",
+      "does he know scikit learn",
+      "does he use keras",
+      "gemini api experience"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "backend",
+    "answer": "His backend stack includes Python, FastAPI, Flask, Django, REST APIs, Socket.IO, JWT, MongoDB, MySQL and PostgreSQL. MediMitra, SmartRoom and AgroPulse are examples of backend projects.",
+    "examples": [
+      "backend skills",
+      "fastapi experience",
+      "django",
+      "flask",
+      "rest api",
+      "database skills",
+      "sql",
+      "mongodb",
+      "postgresql",
+      "mysql",
+      "backend development",
+      "does he build rest apis",
+      "what backend frameworks does he use",
+      "can he develop apis",
+      "does he use databases",
+      "does he work with fastapi",
+      "does he know django",
+      "what databases does he know",
+      "backend technology stack",
+      "does he have backend experience",
+      "jwt authentication",
+      "does he know socket io",
+      "database management"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "devops",
+    "answer": "His portfolio lists Docker, Kubernetes, Terraform, Linux, GitHub Actions, Vercel and CI/CD. MediaDrop DevOps is a project showcasing containerization, microservices and orchestration.",
+    "examples": [
+      "devops skills",
+      "docker experience",
+      "kubernetes",
+      "terraform",
+      "linux",
+      "ci cd",
+      "cloud skills",
+      "github actions",
+      "can he deploy applications",
+      "what devops tools does he use",
+      "has he used docker",
+      "containerization experience",
+      "continuous integration and deployment",
+      "what cloud technologies does he use",
+      "does he work with linux",
+      "devops engineering",
+      "does he know github actions",
+      "cloud deployment experience"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "frontend",
+    "answer": "His listed frontend technologies include ReactJS, TypeScript, Vite, HTML5, CSS3 and JavaScript.",
+    "examples": [
+      "frontend skills",
+      "react experience",
+      "html css",
+      "javascript frontend",
+      "typescript",
+      "vite",
+      "what frontend framework does he use",
+      "does he know react",
+      "can he build websites",
+      "frontend web development",
+      "what web technologies does he know",
+      "does he know css",
+      "does he use javascript",
+      "does he know html",
+      "frontend technology stack"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "projects",
+    "answer": "The portfolio showcases six projects: MediMitra (healthcare AI), AgroPulse (farm advisory), SmartRoom (classroom management), MediaDrop DevOps (video-to-audio microservices), Sayan’s Chatbot (multimodal AI), and Jarvis (voice assistant). Ask about any project by name.",
+    "examples": [
+      "what projects has he built",
+      "show projects",
+      "list projects",
+      "how many projects",
+      "best projects",
+      "portfolio projects",
+      "what has he created",
+      "project list",
+      "tell me about his work",
+      "show me his work",
+      "give me examples of applications he built",
+      "what are his personal projects",
+      "what software has he developed",
+      "show me project demos",
+      "what is in his portfolio",
+      "what apps has he made",
+      "what are the names of his projects",
+      "what are his main projects",
+      "show me all six projects",
+      "project portfolio",
+      "which projects demonstrate his skills"
+    ],
+    "links": [
+      {
+        "label": "View projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "MediMitra",
+    "answer": "MediMitra: A multilingual platform for patient case management, symptom analysis, report summarization and doctor appointment booking, bringing patients, doctors and admins together in one place.\n\nFeatures: AI case interview with chat and voice input; Report upload and summarization using RAG with the Gemini API; Doctor appointment booking, unique patient ID generation and patient health history; Role-based access (patient, doctor, admin) with JWT and email OTP authentication; English, Bengali and Hindi support.\n\nStack: React, Vite, TypeScript, Tailwind CSS, Python, FastAPI, MongoDB Atlas, Gemini API, RAG, JWT, EmailJS.",
+    "examples": [
+      "medimitra",
+      "medi mitra",
+      "healthcare platform",
+      "medical ai project",
+      "patient management project",
+      "doctor booking app",
+      "healthcare rag",
+      "explain MediMitra",
+      "MediMitra technology stack",
+      "MediMitra github link",
+      "MediMitra live demo",
+      "what is the medical platform",
+      "what did he build for healthcare",
+      "which languages does medimitra support",
+      "does medimitra support voice input",
+      "how does the doctor appointment platform work",
+      "what is the patient case management app",
+      "how does medimitra use rag",
+      "what authentication does medimitra use"
+    ],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://medimitra-codersayan.vercel.app/"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "AgroPulse",
+    "answer": "AgroPulse: A multilingual farm advisory application offering crop, fertilizer and disease guidance through a mobile-friendly web interface.\n\nFeatures: AI farm advisor on Gemini with voice input, in English, Hindi, Bengali, Tamil and Telugu; Crop and fertilizer recommendation using Random Forest models trained on Kaggle datasets; Leaf-photo disease detection through Gemini Vision, with a MobileNetV2 model kept as backup; Live weather forecast and mandi prices; all API keys stay on the FastAPI backend.\n\nStack: Python, FastAPI, Scikit-learn, TensorFlow, Gemini API, OpenWeatherMap, API Ninjas, MongoDB Atlas, Vercel, Render.",
+    "examples": [
+      "agropulse",
+      "agro pulse",
+      "farming project",
+      "crop recommendation",
+      "farm advisory",
+      "leaf disease detection",
+      "agriculture ai",
+      "explain AgroPulse",
+      "AgroPulse technology stack",
+      "AgroPulse github link",
+      "AgroPulse live demo",
+      "what is his agriculture app",
+      "which languages does agropulse support",
+      "what models are used in agropulse",
+      "what farming application did he build",
+      "what crop recommendation model does he use",
+      "how does the leaf photo disease detection work",
+      "does agropulse provide weather forecasts",
+      "how does agropulse recommend fertilizer"
+    ],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://agro-pulse-two.vercel.app"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "SmartRoom",
+    "answer": "SmartRoom: A classroom platform where students sign in through a two-step check and teachers get a clear view of content, access requests and session activity.\n\nFeatures: Two-step login: email OTP or face recognition (face-api.js in the browser, DeepFace on the backend); JWT role-based access for students and teachers, bcrypt password hashing, OTP auto-expiry via MongoDB TTL index; Teacher dashboard: upload videos and files, approve registrations, view activity log, export CSV; Automatic session tracking with login time and duration per student.\n\nStack: Python, FastAPI, MongoDB Atlas, DeepFace, face-api.js, JWT, SendGrid, Cloudinary, Vercel, Render.",
+    "examples": [
+      "smartroom",
+      "smart room",
+      "smart classroom",
+      "classroom management",
+      "face recognition project",
+      "student login",
+      "teacher dashboard",
+      "explain SmartRoom",
+      "SmartRoom technology stack",
+      "SmartRoom github link",
+      "SmartRoom live demo",
+      "what is his face recognition classroom app",
+      "how does smartroom login work",
+      "what is the smart classroom project",
+      "how does he implement student authentication",
+      "does smartroom track sessions",
+      "what does the teacher dashboard do",
+      "which database does smartroom use",
+      "how does smartroom use face recognition"
+    ],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://smart-classroom-sayan.vercel.app"
+      },
+      {
+        "label": "Source code",
+        "url": "https://github.com/codersayan0/SmartClassroom"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "MediaDrop DevOps",
+    "answer": "MediaDrop DevOps: A cloud-native video-to-audio conversion platform built with Python microservices, containerized with Docker, orchestrated on Kubernetes and deployed on AWS EKS.\n\nFeatures: Microservices: authentication (JWT), API gateway for upload/download, video converter and email notifications; Docker containers, Kubernetes orchestration and Helm-based deployment to AWS EKS; RabbitMQ messaging between services, MongoDB for app data and PostgreSQL for metadata; CI/CD with GitHub Actions (build, test, deploy), monitored with Prometheus and Grafana.\n\nStack: Python, FastAPI, Docker, Kubernetes, Helm, AWS EKS, RabbitMQ, MongoDB, PostgreSQL, GitHub Actions, Prometheus, Grafana, Render.",
+    "examples": [
+      "mediadrop",
+      "media drop",
+      "mediadrop devops",
+      "video audio converter",
+      "microservices project",
+      "video to audio",
+      "aws eks project",
+      "explain MediaDrop DevOps",
+      "MediaDrop DevOps technology stack",
+      "MediaDrop DevOps github link",
+      "MediaDrop DevOps live demo",
+      "what is the media conversion project",
+      "what is the video conversion microservice",
+      "how does mediadrop use docker",
+      "what messaging system does mediadrop use",
+      "how is mediadrop deployed",
+      "what is his kubernetes project",
+      "does mediadrop have a ci cd pipeline",
+      "how does mediadrop monitor services"
+    ],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://video-audio-devops.onrender.com/"
+      },
+      {
+        "label": "Source code",
+        "url": "https://github.com/codersayan0/video-audio-devops"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "Sayan's Chatbot",
+    "answer": "Sayan's Chatbot: Multimodal AI chatbot powered by Google Gemini Flash 1.5, built with Gradio. Accepts text, voice, and image inputs and responds with voice and text.\n\nFeatures: Text, voice and image inputs in one interface; Responds with both voice and text; Powered by Google Gemini Flash 1.5 with a Gradio front end.\n\nStack: Python, Gemini API, Gradio, Multimodal.",
+    "examples": [
+      "sayan chatbot",
+      "sayan's chatbot",
+      "multimodal chatbot",
+      "gradio chatbot",
+      "voice text image chatbot",
+      "gemini chatbot project",
+      "explain Sayan's Chatbot",
+      "Sayan's Chatbot technology stack",
+      "Sayan's Chatbot github link",
+      "Sayan's Chatbot live demo",
+      "what is his multimodal ai application",
+      "which chatbot project accepts images",
+      "what does his gradio application do",
+      "which model did he use in his multimodal chatbot",
+      "can his chatbot project take voice input",
+      "what is the multimodal chatbot stack"
+    ],
+    "links": [
+      {
+        "label": "Source code",
+        "url": "https://github.com/codersayan0/Sayan-Chatbot"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "Jarvis",
+    "answer": "Jarvis: Python-based virtual assistant built with NLP and automation. It answers by voice and handles everyday desktop tasks.\n\nFeatures: Checks the time and date, searches Wikipedia; Plays music, takes screenshots, tells jokes; Controls the system (shutdown / restart).\n\nStack: Python, NLP, Automation, Speech.",
+    "examples": [
+      "jarvis",
+      "jarves",
+      "voice assistant",
+      "desktop automation project",
+      "python virtual assistant",
+      "explain Jarvis",
+      "Jarvis technology stack",
+      "Jarvis github link",
+      "Jarvis live demo",
+      "what is the jarvis voice assistant",
+      "how does jarvis work",
+      "what desktop automation can jarvis perform",
+      "what tasks does jarvis support",
+      "what is his python voice assistant",
+      "does jarvis take screenshots"
+    ],
+    "links": [
+      {
+        "label": "Source code",
+        "url": "https://github.com/codersayan0/Jarvis"
+      },
+      {
+        "label": "All projects",
+        "url": "#projects"
+      }
+    ]
+  },
+  {
+    "id": "experience",
+    "answer": "The portfolio lists two internships (Aug–Sep 2025): Python Development Intern at Cognifyz Technologies, building Python applications and automation scripts; and Python Intern at BroskiesHub, working on scripting, automation and collaboration. It also lists a July 2025 AIvariant Generative AI course-linked internship project, separately from the internship count.",
+    "examples": [
+      "internship experience",
+      "work experience",
+      "where did he intern",
+      "previous companies",
+      "professional experience",
+      "how many internships",
+      "cognifyz",
+      "broskieshub",
+      "aivariant",
+      "employment history",
+      "what internships has he completed",
+      "does he have practical experience",
+      "has he worked as an intern",
+      "what work has he done professionally",
+      "tell me about his previous work experience",
+      "when did he intern",
+      "what companies did he work for",
+      "has he done any internships",
+      "does he have industry experience",
+      "what did he do during internships"
+    ],
+    "links": [
+      {
+        "label": "Education & experience",
+        "url": "#qualification"
+      }
+    ]
+  },
+  {
+    "id": "education",
+    "answer": "Sayan is pursuing B.Tech in Computer Science & Engineering at Swami Vivekananda Institute of Science and Technology, Kolkata (2023–2027). He completed higher secondary (science, PCM) at Akchara Desh Bandhu High School (2021–2023). His coursework includes DSA, OOP, OS, DBMS and computer networks.",
+    "examples": [
+      "education",
+      "college name",
+      "where does he study",
+      "university",
+      "graduation year",
+      "degree",
+      "academic background",
+      "school",
+      "btech",
+      "qualification",
+      "when will he graduate",
+      "which institute does he attend",
+      "what is his educational qualification",
+      "what is his branch",
+      "what year will he finish college",
+      "is he a computer science student",
+      "what subjects does he study",
+      "what is his academic qualification",
+      "where did he complete higher secondary",
+      "what is his expected graduation year",
+      "what course is he pursuing",
+      "svist",
+      "what is the full name of svist"
+    ],
+    "links": [
+      {
+        "label": "Education",
+        "url": "#qualification"
+      }
+    ]
+  },
+  {
+    "id": "certifications",
+    "answer": "The portfolio lists seven certifications: Generative AI and MERN Stack Development (ExcelR, July 2025), Python Programming (Udemy, August 2025), DevOps and Data Science (Oracle University, September 2025), Data Structures & Algorithms (Great Learning, August 2024), and Machine Learning & Data Analytics (I-HR Technology Solutions, July 2024).",
+    "examples": [
+      "certificates",
+      "certifications",
+      "credentials",
+      "courses completed",
+      "oracle certificate",
+      "excelr",
+      "udemy",
+      "how many certificates",
+      "training courses",
+      "what certificates did he earn",
+      "show his certifications",
+      "what courses has he completed",
+      "does he have python certification",
+      "does he have devops certification",
+      "what certifications are listed",
+      "certification list",
+      "has he completed machine learning training",
+      "which online courses did he complete"
+    ],
+    "links": [
+      {
+        "label": "View certificates",
+        "url": "#certifications"
+      }
+    ]
+  },
+  {
+    "id": "availability",
+    "answer": "Sayan’s portfolio states that he is open to internships and collaborations in software development, AI/ML engineering, DevOps and backend development. Contact him to confirm current availability and discuss a role.",
+    "examples": [
+      "is he available for hire",
+      "open to work",
+      "looking for internship",
+      "hire sayan",
+      "job opportunities",
+      "available for internships",
+      "career goals",
+      "what role is he looking for",
+      "can i recruit him",
+      "is he looking for a job",
+      "is he looking for internships",
+      "what job is he interested in",
+      "what is his career focus",
+      "can we collaborate with him",
+      "does he accept internship opportunities",
+      "is he looking for backend roles",
+      "is he open to collaboration",
+      "is he seeking ai roles",
+      "is he open to opportunities"
+    ],
+    "links": [
+      {
+        "label": "Contact",
+        "url": "#contact"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/codersayan/"
+      }
+    ]
+  },
+  {
+    "id": "resume",
+    "answer": "You can view Sayan’s resume using the link published in his portfolio.",
+    "examples": [
+      "resume",
+      "cv",
+      "download resume",
+      "view cv",
+      "curriculum vitae",
+      "send resume",
+      "resume link",
+      "where can i find his resume",
+      "give me his cv",
+      "can i download his resume",
+      "share your resume",
+      "show me his resume",
+      "where is the resume pdf",
+      "how can i access his cv",
+      "can you send me your cv"
+    ],
+    "links": [
+      {
+        "label": "View resume",
+        "url": "https://drive.google.com/file/d/1i4j5R1AtzNhkAkwjXx0yPxiMiK2qLnYo/view"
+      }
+    ]
+  },
+  {
+    "id": "github",
+    "answer": "Sayan’s GitHub username is codersayan0. Visit his profile to explore public repositories.",
+    "examples": [
+      "github",
+      "github profile",
+      "repositories",
+      "source code profile",
+      "github username",
+      "open source profile",
+      "where can i see his code",
+      "show me his github",
+      "what is his github id",
+      "give me github url",
+      "where are his repositories",
+      "link to his github account",
+      "what is his github handle",
+      "show github profile"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/codersayan0"
+      }
+    ]
+  },
+  {
+    "id": "linkedin",
+    "answer": "Sayan’s LinkedIn profile is linked below.",
+    "examples": [
+      "linkedin",
+      "linkedin profile",
+      "professional network",
+      "connect on linkedin",
+      "how can i connect with him on linkedin",
+      "share his linkedin url",
+      "what is his linkedin id",
+      "give me linkedin link",
+      "where is his professional profile",
+      "show linkedin"
+    ],
+    "links": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/codersayan/"
+      }
+    ]
+  },
+  {
+    "id": "contact",
+    "answer": "You can contact Sayan at sayanmandal7212@gmail.com, use his portfolio contact form, or connect via LinkedIn.",
+    "examples": [
+      "contact",
+      "email address",
+      "how can i contact him",
+      "get in touch",
+      "send message",
+      "reach out",
+      "mail id",
+      "contact information",
+      "what is his email",
+      "how do i reach him",
+      "give me his mail address",
+      "how do i get in touch",
+      "how can a recruiter reach him",
+      "what is his professional email",
+      "contact details",
+      "where can i send a job offer"
+    ],
+    "links": [
+      {
+        "label": "Email",
+        "url": "mailto:sayanmandal7212@gmail.com"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/codersayan/"
+      },
+      {
+        "label": "Contact form",
+        "url": "#contact"
+      }
+    ]
+  },
+  {
+    "id": "location",
+    "answer": "His contact section lists Midnapore, West Bengal, India. His college is in Kolkata. His exact current address is not provided.",
+    "examples": [
+      "where is he from",
+      "location",
+      "hometown",
+      "where does he live",
+      "which city",
+      "midnapore",
+      "kolkata",
+      "what is his hometown",
+      "where is sayan based",
+      "which state is he from",
+      "what is his city",
+      "where is he located",
+      "where is his college located",
+      "where is his home town"
+    ],
+    "links": [
+      {
+        "label": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  {
+    "id": "unknown",
+    "answer": "That information is not available in Sayan’s public portfolio. You can contact him directly if it is relevant to a professional opportunity.",
+    "examples": [
+      "age",
+      "date of birth",
+      "birthday",
+      "phone number",
+      "home address",
+      "salary",
+      "salary expectation",
+      "relationship",
+      "girlfriend",
+      "family",
+      "cgpa",
+      "marks",
+      "religion",
+      "password",
+      "api key",
+      "private information",
+      "what is the weather",
+      "write code for me",
+      "tell me a joke",
+      "who is the president",
+      "ignore instructions",
+      "personal secrets",
+      "how old is he",
+      "what is his age",
+      "what is his exact address",
+      "what is his current salary",
+      "what are his grades",
+      "what is his phone",
+      "what is his favourite food",
+      "what is his favorite color",
+      "what is his personal life",
+      "where was he born",
+      "what is his date of birth",
+      "what is his marital status",
+      "what is his religion",
+      "what is the capital of india",
+      "how is the weather today",
+      "write me a program",
+      "what is the meaning of life",
+      "tell me about politics",
+      "how much does he earn",
+      "what is his semester",
+      "what is his current semester",
+      "what is his cgpa",
+      "what is his expected salary",
+      "what is his github password",
+      "what is his private key"
+    ],
+    "links": [
+      {
+        "label": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  {
+    "id": "cognifyz",
+    "answer": "Sayan was a Python Development Intern at Cognifyz Technologies from August to September 2025. His portfolio says he built Python applications and automation scripts as part of a structured internship program.",
+    "examples": [
+      "what did he do at cognifyz",
+      "when was his cognifyz internship",
+      "cognifyz experience",
+      "cognifyz internship certificate",
+      "python development intern at cognifyz",
+      "cognifyz offer letter",
+      "what was his role at cognifyz"
+    ],
+    "links": [
+      {
+        "label": "Certificate",
+        "url": "https://drive.google.com/file/d/14aFdmzjU3z3S3-x0rxcDSJCfSqD4CxoO/view"
+      }
+    ]
+  },
+  {
+    "id": "broskieshub",
+    "answer": "Sayan was a Python Intern at BroskiesHub from August to September 2025. His portfolio describes Python development, scripting, automation and team collaboration.",
+    "examples": [
+      "what did he do at broskieshub",
+      "when was his broskieshub internship",
+      "broskieshub experience",
+      "broskieshub internship certificate",
+      "python intern at broskieshub",
+      "broskieshub offer letter",
+      "what was his role at broskieshub"
+    ],
+    "links": [
+      {
+        "label": "Certificate",
+        "url": "https://drive.google.com/file/d/1Vx5scz7SVKC7YeHk1hdJIZKQv7Fw1yoh/view"
+      }
+    ]
+  },
+  {
+    "id": "aivariant",
+    "answer": "In July 2025, Sayan completed a Generative AI internship project linked to the AIvariant course. It involved Generative AI, Python and LLMs; it is listed separately from his two internships.",
+    "examples": [
+      "what did he do at aivariant",
+      "aivariant course project",
+      "aivariant internship project",
+      "aivariant certificate",
+      "generative ai internship project",
+      "when did he complete aivariant",
+      "was aivariant an internship"
+    ],
+    "links": [
+      {
+        "label": "Certificate",
+        "url": "https://drive.google.com/file/d/1Rw8QGQlHX5m_1Y_5PMapULOsVtktyjHo/view"
+      }
+    ]
+  },
+  {
+    "id": "programming",
+    "answer": "The portfolio lists Python, C, C++, Java, JavaScript and TypeScript as programming languages. Python is his main focus for AI applications, automation and backend engineering.",
+    "examples": [
+      "which programming languages does he know",
+      "what programming languages can he code in",
+      "what is his primary programming language",
+      "does he know c++",
+      "does he know java",
+      "is python his main language",
+      "what coding languages does he use",
+      "what language does he specialize in",
+      "list programming languages"
+    ],
+    "links": [
+      {
+        "label": "Skills",
+        "url": "#skills"
+      }
+    ]
+  },
+  {
+    "id": "localbot",
+    "answer": "This portfolio assistant is a local intent-classification model trained on example questions and public portfolio facts. It uses TF-IDF and nearest-neighbor matching to select curated answers. It does not use a generative AI API, and chat questions stay in your browser.",
+    "examples": [
+      "how does this chatbot work",
+      "how were you trained",
+      "is this bot using an api",
+      "are you a local model",
+      "is this chatbot trained on sayan",
+      "what model powers this assistant",
+      "are you connected to gemini",
+      "do you use an llm",
+      "is my chat private",
+      "does this chatbot send my messages anywhere",
+      "who trained this chatbot",
+      "what is tf idf"
+    ],
+    "links": []
+  },
+  {
+    "id": "thanks",
+    "answer": "You’re welcome! Feel free to ask anything else about Sayan’s professional background.",
+    "examples": [
+      "thanks",
+      "thank you",
+      "thank you so much",
+      "great thanks",
+      "nice",
+      "awesome",
+      "thanks for helping",
+      "that was helpful"
+    ],
+    "links": []
+  },
+  {
+    "id": "goodbye",
+    "answer": "Thanks for visiting Sayan’s portfolio! You can always return to explore his work or reach out through the Contact section.",
+    "examples": [
+      "bye",
+      "goodbye",
+      "see you",
+      "see you later",
+      "have a nice day",
+      "take care",
+      "good night"
+    ],
+    "links": [
+      {
+        "label": "Contact",
+        "url": "#contact"
+      }
+    ]
+  }
+]

@@ -3,53 +3,13 @@
    ================================================================ */
 
 /* ---- INTRO LOADER ---- */
-(function runIntro() {
-  const loader = document.getElementById('intro-loader');
-  if (!loader) return;
-
-  // Prevent scroll during intro
-  document.body.style.overflow = 'hidden';
-
-  const words = ['iw1', 'iw2', 'iw3', 'iw4'];
-  const timings = [0, 750, 1500, 2300]; // when each word appears (ms)
-  const duration = 700; // how long each word stays visible
-
-  words.forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    // Show word
-    setTimeout(() => {
-      el.classList.add('active');
-    }, timings[i]);
-
-    // Hide word (except last — it fades with loader)
-    if (i < words.length - 1) {
-      setTimeout(() => {
-        el.classList.remove('active');
-        el.classList.add('exit');
-      }, timings[i] + duration + 200);
-    }
-  });
-
-  // Hide loader after all words shown (click / key / reduced-motion skips it)
-  const hideLoader = () => {
-    loader.classList.add('hide');
-    document.body.style.overflow = '';
-  };
-  const hideTimer = setTimeout(hideLoader, 3400);
-  const skip = () => { clearTimeout(hideTimer); hideLoader(); };
-  loader.addEventListener('click', skip);
-  document.addEventListener('keydown', skip, { once: true });
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) skip();
-})();
-
 /* ---- THREE.JS STAR FIELD ---- */
-(function initStars() {
+function initStars() {
   const canvas = document.getElementById('bg-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
+  if (!canvas || canvas.dataset.starsReady || typeof THREE === 'undefined' || matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) return;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+  let renderer; try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false }); } catch { return; }
+  canvas.dataset.starsReady = "true";
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -59,7 +19,7 @@
 
   // Stars
   const starGeo = new THREE.BufferGeometry();
-  const COUNT = 1800;
+  const COUNT = 650;
   const pos = new Float32Array(COUNT * 3);
   for (let i = 0; i < COUNT * 3; i++) pos[i] = (Math.random() - 0.5) * 280;
   starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
@@ -87,7 +47,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function tick() {
     requestAnimationFrame(tick);
-    if (document.hidden) return;
+    if (document.hidden || document.documentElement.dataset.theme === 'light') return;
     stars.rotation.y += 0.0003 + mx * 0.0006;
     stars.rotation.x += 0.0001 + my * 0.0004;
     renderer.render(scene, camera);
@@ -99,7 +59,9 @@
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
-})();
+}
+initStars();
+document.getElementById("three-library")?.addEventListener("load", initStars, {once:true});
 
 /* ---- CUSTOM CURSOR ---- */
 const dot  = document.querySelector('.cursor-dot');
@@ -112,6 +74,7 @@ document.addEventListener('mousemove', e => {
 });
 
 (function lagRing() {
+  if (!matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
   if (ring) {
     rx += (ax - rx) * 0.1;
     ry += (ay - ry) * 0.1;
@@ -158,6 +121,7 @@ const navToggle = document.getElementById('nav-toggle');
 
 navToggle.addEventListener('click', () => {
   const open = navMenu.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', String(open));
   const spans = navToggle.querySelectorAll('span');
   if (open) {
     spans[0].style.transform = 'translateY(7px) rotate(45deg)';
@@ -171,6 +135,7 @@ navToggle.addEventListener('click', () => {
 document.querySelectorAll('.nav__link').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
     navToggle.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
   });
 });
@@ -306,6 +271,8 @@ if (contactForm) {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setFeedback('✗ Please enter a valid email.', 'error'); return;
     }
+    if (!window.emailjs) { setFeedback("Email service unavailable. Please use the direct email link.", "error"); return; }
+    if (name.length > 100 || email.length > 254 || subject.length > 150 || message.length > 3000) { setFeedback("Please shorten your message or details.", "error"); return; }
     if (!message) {
       setFeedback('✗ Please write a message.', 'error'); return;
     }
@@ -328,7 +295,7 @@ if (contactForm) {
       btnIcon.className = 'fas fa-check';
       btn.style.background = '#22c55e';
       btn.style.boxShadow = '0 0 24px rgba(34,197,94,0.4)';
-      setFeedback('✓ Message sent! I will reply within 24 hours.', 'success');
+      setFeedback('✓ Message sent! Thank you for reaching out.', 'success');
       showToast('✓ Message sent successfully!');
       contactForm.reset();
 
@@ -338,7 +305,7 @@ if (contactForm) {
         btn.style.background = '';
         btn.style.boxShadow = '';
         btn.disabled = false;
-      }, 3000);
+      }, 10000);
     })
     .catch((err) => {
       /* Error */
@@ -387,7 +354,7 @@ if (contactForm) {
       })(t0);
     });
   }, { threshold: 0.4 });
-  els.forEach(el => { fmt(el, 0); obs.observe(el); });
+  els.forEach(el => { fmt(el, parseFloat(el.dataset.count)); obs.observe(el); });
 })();
 
 
@@ -401,47 +368,221 @@ if (contactForm) {
   const fine   = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const PROJECTS = [
-    { name: 'MediMitra', fc: '#06b6d4', cat: ['ai', 'fullstack'], img: 'images/projects/medimitra.webp', status: 'Deployed',
-      tag: 'AI-powered multilingual healthcare platform',
-      desc: 'A multilingual platform for patient case management, symptom analysis, report summarization and doctor appointment booking, bringing patients, doctors and admins together in one place.',
-      points: ['AI case interview with chat and voice input', 'Report upload and summarization using RAG with the Gemini API', 'Doctor appointment booking, unique patient ID generation and patient health history', 'Role-based access (patient, doctor, admin) with JWT and email OTP authentication', 'English, Bengali and Hindi support'],
-      metrics: [[3, 'User roles'], [3, 'Languages']],
-      tags: ['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'Python', 'FastAPI', 'MongoDB Atlas', 'Gemini API', 'RAG', 'JWT', 'EmailJS'],
-      live: 'https://medimitra-codersayan.vercel.app/' },
-    { name: 'AgroPulse', fc: '#22c55e', cat: ['ai', 'backend'], img: 'images/projects/agropulse.webp', status: 'Deployed',
-      tag: 'AI farm advisory for Indian farmers',
-      desc: 'Small and marginal farmers (86% of Indian farmers, per NABARD 2022) often decide on crops, fertilizers and diseases by guesswork. AgroPulse offers free, multilingual AI advice from any phone browser.',
-      points: ['AI farm advisor on Gemini with voice input, in English, Hindi, Bengali, Tamil and Telugu', 'Crop and fertilizer recommendation using Random Forest models trained on Kaggle datasets', 'Leaf-photo disease detection through Gemini Vision, with a MobileNetV2 model kept as backup', 'Live weather forecast and mandi prices; all API keys stay on the FastAPI backend'],
-      metrics: [[6, 'Modules'], [5, 'Languages'], [99.3, 'Crop-model accuracy', '%', 1]],
-      tags: ['Python', 'FastAPI', 'Scikit-learn', 'TensorFlow', 'Gemini API', 'OpenWeatherMap', 'API Ninjas', 'MongoDB Atlas', 'Vercel', 'Render'],
-      live: 'https://agro-pulse-two.vercel.app' },
-    { name: 'SmartRoom', fc: '#7b2fff', cat: ['fullstack', 'backend'], img: 'images/projects/smartroom.webp', status: 'Deployed',
-      tag: 'Intelligent classroom management platform',
-      desc: 'A classroom platform where students sign in through a two-step check and teachers get a clear view of content, access requests and session activity.',
-      points: ['Two-step login: email OTP or face recognition (face-api.js in the browser, DeepFace on the backend)', 'JWT role-based access for students and teachers, bcrypt password hashing, OTP auto-expiry via MongoDB TTL index', 'Teacher dashboard: upload videos and files, approve registrations, view activity log, export CSV', 'Automatic session tracking with login time and duration per student'],
-      metrics: [[20, 'API endpoints'], [2, 'Roles'], [2, 'Login factors']],
-      tags: ['Python', 'FastAPI', 'MongoDB Atlas', 'DeepFace', 'face-api.js', 'JWT', 'SendGrid', 'Cloudinary', 'Vercel', 'Render'],
-      live: 'https://smart-classroom-sayan.vercel.app', gh: 'https://github.com/codersayan0/SmartClassroom' },
-    { name: 'MediaDrop DevOps', fc: '#f59e0b', cat: ['devops', 'backend'], img: 'images/projects/mediadrop.webp', status: 'Deployed',
-      tag: 'Cloud-native video-to-audio platform',
-      desc: 'A cloud-native video-to-audio conversion platform built with Python microservices, containerized with Docker, orchestrated on Kubernetes and deployed on AWS EKS.',
-      points: ['Microservices: authentication (JWT), API gateway for upload/download, video converter and email notifications', 'Docker containers, Kubernetes orchestration and Helm-based deployment to AWS EKS', 'RabbitMQ messaging between services, MongoDB for app data and PostgreSQL for metadata', 'CI/CD with GitHub Actions (build, test, deploy), monitored with Prometheus and Grafana'],
-      metrics: [],
-      tags: ['Python', 'FastAPI', 'Docker', 'Kubernetes', 'Helm', 'AWS EKS', 'RabbitMQ', 'MongoDB', 'PostgreSQL', 'GitHub Actions', 'Prometheus', 'Grafana', 'Render'],
-      live: 'https://video-audio-devops.onrender.com/', gh: 'https://github.com/codersayan0/video-audio-devops' },
-    { name: "Sayan's Chatbot", fc: '#a855f7', cat: ['ai'], img: 'images/projects/chatbot.webp', status: 'On GitHub',
-      tag: 'Multimodal AI chatbot with voice, text and image input',
-      desc: 'Multimodal AI chatbot powered by Google Gemini Flash 1.5, built with Gradio. Accepts text, voice, and image inputs and responds with voice and text.',
-      points: ['Text, voice and image inputs in one interface', 'Responds with both voice and text', 'Powered by Google Gemini Flash 1.5 with a Gradio front end'],
-      metrics: [], tags: ['Python', 'Gemini API', 'Gradio', 'Multimodal'],
-      gh: 'https://github.com/codersayan0/Sayan-Chatbot' },
-    { name: 'Jarves', fc: '#ec4899', cat: ['ai'], img: 'images/projects/jarves.webp', status: 'On GitHub',
-      tag: 'Python voice assistant built on NLP and automation',
-      desc: 'Python-based virtual assistant built with NLP and automation. It answers by voice and handles everyday desktop tasks.',
-      points: ['Checks the time and date, searches Wikipedia', 'Plays music, takes screenshots, tells jokes', 'Controls the system (shutdown / restart)'],
-      metrics: [], tags: ['Python', 'NLP', 'Automation', 'Speech'],
-      gh: 'https://github.com/codersayan0/Jarvis' }
-  ];
+  {
+    "name": "MediMitra",
+    "fc": "#06b6d4",
+    "cat": [
+      "ai",
+      "fullstack"
+    ],
+    "img": "images/projects/medimitra.webp",
+    "status": "Deployed",
+    "tag": "AI-powered multilingual healthcare platform",
+    "desc": "A multilingual platform for patient case management, symptom analysis, report summarization and doctor appointment booking, bringing patients, doctors and admins together in one place.",
+    "points": [
+      "AI case interview with chat and voice input",
+      "Report upload and summarization using RAG with the Gemini API",
+      "Doctor appointment booking, unique patient ID generation and patient health history",
+      "Role-based access (patient, doctor, admin) with JWT and email OTP authentication",
+      "English, Bengali and Hindi support"
+    ],
+    "metrics": [
+      [
+        3,
+        "User roles"
+      ],
+      [
+        3,
+        "Languages"
+      ]
+    ],
+    "tags": [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Tailwind CSS",
+      "Python",
+      "FastAPI",
+      "MongoDB Atlas",
+      "Gemini API",
+      "RAG",
+      "JWT",
+      "EmailJS"
+    ],
+    "live": "https://medimitra-codersayan.vercel.app/"
+  },
+  {
+    "name": "AgroPulse",
+    "fc": "#22c55e",
+    "cat": [
+      "ai",
+      "backend"
+    ],
+    "img": "images/projects/agropulse.webp",
+    "status": "Deployed",
+    "tag": "AI farm advisory for Indian farmers",
+    "desc": "A multilingual farm advisory application offering crop, fertilizer and disease guidance through a mobile-friendly web interface.",
+    "points": [
+      "AI farm advisor on Gemini with voice input, in English, Hindi, Bengali, Tamil and Telugu",
+      "Crop and fertilizer recommendation using Random Forest models trained on Kaggle datasets",
+      "Leaf-photo disease detection through Gemini Vision, with a MobileNetV2 model kept as backup",
+      "Live weather forecast and mandi prices; all API keys stay on the FastAPI backend"
+    ],
+    "metrics": [
+      [
+        6,
+        "Modules"
+      ],
+      [
+        5,
+        "Languages"
+      ]
+    ],
+    "tags": [
+      "Python",
+      "FastAPI",
+      "Scikit-learn",
+      "TensorFlow",
+      "Gemini API",
+      "OpenWeatherMap",
+      "API Ninjas",
+      "MongoDB Atlas",
+      "Vercel",
+      "Render"
+    ],
+    "live": "https://agro-pulse-two.vercel.app"
+  },
+  {
+    "name": "SmartRoom",
+    "fc": "#7b2fff",
+    "cat": [
+      "fullstack",
+      "backend"
+    ],
+    "img": "images/projects/smartroom.webp",
+    "status": "Deployed",
+    "tag": "Intelligent classroom management platform",
+    "desc": "A classroom platform where students sign in through a two-step check and teachers get a clear view of content, access requests and session activity.",
+    "points": [
+      "Two-step login: email OTP or face recognition (face-api.js in the browser, DeepFace on the backend)",
+      "JWT role-based access for students and teachers, bcrypt password hashing, OTP auto-expiry via MongoDB TTL index",
+      "Teacher dashboard: upload videos and files, approve registrations, view activity log, export CSV",
+      "Automatic session tracking with login time and duration per student"
+    ],
+    "metrics": [
+      [
+        20,
+        "API endpoints"
+      ],
+      [
+        2,
+        "Roles"
+      ],
+      [
+        2,
+        "Login factors"
+      ]
+    ],
+    "tags": [
+      "Python",
+      "FastAPI",
+      "MongoDB Atlas",
+      "DeepFace",
+      "face-api.js",
+      "JWT",
+      "SendGrid",
+      "Cloudinary",
+      "Vercel",
+      "Render"
+    ],
+    "live": "https://smart-classroom-sayan.vercel.app",
+    "gh": "https://github.com/codersayan0/SmartClassroom"
+  },
+  {
+    "name": "MediaDrop DevOps",
+    "fc": "#f59e0b",
+    "cat": [
+      "devops",
+      "backend"
+    ],
+    "img": "images/projects/mediadrop.webp",
+    "status": "Deployed",
+    "tag": "Cloud-native video-to-audio platform",
+    "desc": "A cloud-native video-to-audio conversion platform built with Python microservices, containerized with Docker, orchestrated on Kubernetes and deployed on AWS EKS.",
+    "points": [
+      "Microservices: authentication (JWT), API gateway for upload/download, video converter and email notifications",
+      "Docker containers, Kubernetes orchestration and Helm-based deployment to AWS EKS",
+      "RabbitMQ messaging between services, MongoDB for app data and PostgreSQL for metadata",
+      "CI/CD with GitHub Actions (build, test, deploy), monitored with Prometheus and Grafana"
+    ],
+    "metrics": [],
+    "tags": [
+      "Python",
+      "FastAPI",
+      "Docker",
+      "Kubernetes",
+      "Helm",
+      "AWS EKS",
+      "RabbitMQ",
+      "MongoDB",
+      "PostgreSQL",
+      "GitHub Actions",
+      "Prometheus",
+      "Grafana",
+      "Render"
+    ],
+    "live": "https://video-audio-devops.onrender.com/",
+    "gh": "https://github.com/codersayan0/video-audio-devops"
+  },
+  {
+    "name": "Sayan's Chatbot",
+    "fc": "#a855f7",
+    "cat": [
+      "ai"
+    ],
+    "img": "images/projects/chatbot.webp",
+    "status": "On GitHub",
+    "tag": "Multimodal AI chatbot with voice, text and image input",
+    "desc": "Multimodal AI chatbot powered by Google Gemini Flash 1.5, built with Gradio. Accepts text, voice, and image inputs and responds with voice and text.",
+    "points": [
+      "Text, voice and image inputs in one interface",
+      "Responds with both voice and text",
+      "Powered by Google Gemini Flash 1.5 with a Gradio front end"
+    ],
+    "metrics": [],
+    "tags": [
+      "Python",
+      "Gemini API",
+      "Gradio",
+      "Multimodal"
+    ],
+    "gh": "https://github.com/codersayan0/Sayan-Chatbot"
+  },
+  {
+    "name": "Jarvis",
+    "fc": "#ec4899",
+    "cat": [
+      "ai"
+    ],
+    "img": "images/projects/jarves.webp",
+    "status": "On GitHub",
+    "tag": "Python voice assistant built on NLP and automation",
+    "desc": "Python-based virtual assistant built with NLP and automation. It answers by voice and handles everyday desktop tasks.",
+    "points": [
+      "Checks the time and date, searches Wikipedia",
+      "Plays music, takes screenshots, tells jokes",
+      "Controls the system (shutdown / restart)"
+    ],
+    "metrics": [],
+    "tags": [
+      "Python",
+      "NLP",
+      "Automation",
+      "Speech"
+    ],
+    "gh": "https://github.com/codersayan0/Jarvis"
+  }
+];
 
   const grid = document.getElementById('pgrid');
   const modal = document.getElementById('pmodal');
@@ -449,7 +590,7 @@ if (contactForm) {
   if (!grid || !modal) return;
   const ring = document.querySelector('.cursor-ring');
   const cols = () => (matchMedia('(max-width: 640px)').matches ? 2 : 3);
-  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
   /* ---- render cards ---- */
   grid.innerHTML = PROJECTS.map((p, i) => `
@@ -465,8 +606,8 @@ if (contactForm) {
         <div class="pcard__foot">
           <span class="pcard__more">Details <i class="fas fa-arrow-right"></i></span>
           <span class="pcard__links">
-            ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" aria-label="${esc(p.name)} live demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
-            ${p.gh ? `<a href="${p.gh}" target="_blank" rel="noopener" aria-label="${esc(p.name)} on GitHub"><i class="fab fa-github"></i></a>` : ''}
+            ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} live demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
+            ${p.gh ? `<a href="${p.gh}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} on GitHub"><i class="fab fa-github"></i></a>` : ''}
           </span>
         </div>
       </div>
@@ -501,7 +642,7 @@ if (contactForm) {
   /* ---- filter ---- */
   bar.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    bar.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    bar.querySelectorAll('button').forEach(x => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', String(x === b)); });
     const f = b.dataset.f;
     cards.forEach(c => c.classList.add('out'));
     setTimeout(() => {
@@ -515,7 +656,9 @@ if (contactForm) {
   });
 
   /* ---- modal ---- */
+  let modalTrigger;
   function openModal(p) {
+    modalTrigger = document.activeElement;
     modal.style.setProperty('--fc', p.fc);
     modal.innerHTML = `
       <div class="pm">
@@ -526,8 +669,8 @@ if (contactForm) {
             <h3 class="pm__title">${esc(p.name)}</h3>
             <p class="pm__tag">${esc(p.tag)}</p>
             <div class="pm__btns">
-              ${p.live ? `<a class="project-card__btn" href="${p.live}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
-              ${p.gh ? `<a class="project-card__btn project-card__btn--ghost" href="${p.gh}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>` : ''}
+              ${p.live ? `<a class="project-card__btn" href="${p.live}" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+              ${p.gh ? `<a class="project-card__btn project-card__btn--ghost" href="${p.gh}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>` : ''}
             </div>
             <p class="pm__desc">${esc(p.desc)}</p>
             ${p.metrics.length ? `<div class="pm__metrics">${p.metrics.map(m => `<div><b data-n="${m[0]}" data-dec="${m[3] || 0}" data-suf="${m[2] || ''}">0</b><span>${m[1]}</span></div>`).join('')}</div>` : ''}
@@ -556,52 +699,7 @@ if (contactForm) {
   }
   modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-close]')) closeModal(); });
   modal.addEventListener('cancel', e => { e.preventDefault(); closeModal(); });
-  modal.addEventListener('close', () => { document.body.style.overflow = ''; });
-})();
-
-/* ---- HERO: letter-by-letter name reveal + typing role ---- */
-(function () {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const start = reduce ? 0 : 3300; // after the intro loader
-
-  const nm = document.querySelector('.home__name');
-  if (nm) {
-    let k = 0;
-    const wrap = node => [...node.childNodes].forEach(n => {
-      if (n.nodeType === 3) {
-        const f = document.createDocumentFragment();
-        [...n.textContent].forEach(ch => {
-          const s = document.createElement('span');
-          s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.style.setProperty('--k', k++); s.textContent = ch;
-          f.appendChild(s);
-        });
-        n.replaceWith(f);
-      } else if (n.nodeType === 1 && n.tagName !== 'BR') wrap(n);
-    });
-    nm.setAttribute('aria-label', 'Sayan Mandal');
-    wrap(nm);
-    setTimeout(() => nm.classList.add('go'), start);
-  }
-
-  const role = document.querySelector('.home__role');
-  if (role && !reduce) {
-    const phrases = [role.textContent.trim(), 'Backend Engineer | Web Developer', 'Open to internships'];
-    role.setAttribute('aria-label', phrases[0]);
-    role.textContent = '';
-    const out = document.createElement('span');
-    role.appendChild(out); role.classList.add('typing');
-    let pi = 0, ci = 0, del = false;
-    (function tick() {
-      const w = phrases[pi];
-      ci += del ? -1 : 1;
-      out.textContent = w.slice(0, ci);
-      let d = del ? 26 : 55;
-      if (!del && ci === w.length) { del = true; d = 1800; }
-      else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; d = 350; }
-      setTimeout(tick, d);
-    })();
-    // (typing starts immediately but sits behind the loader until it hides)
-  }
+  modal.addEventListener('close', () => { document.body.style.overflow = ''; modalTrigger?.focus(); });
 })();
 
 /* ---- Magnetic buttons + hero parallax (desktop pointers only) ---- */
@@ -644,3 +742,4 @@ if (contactForm) {
   }), { threshold: 0.8 });
   document.querySelectorAll('.section-title').forEach(t => obs.observe(t));
 })();
+
